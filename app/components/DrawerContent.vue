@@ -1,100 +1,110 @@
 <template lang="html">
-    <GridLayout rows="auto, *" class="nt-drawer__content">
-        <StackLayout row="0" class="nt-drawer__header">
-            <Image class="nt-drawer__header-image fas t-36" src.decode="font://&#xf2bd;"/>
-            <Label class="nt-drawer__header-brand" text="User Name"/>
-            <Label class="nt-drawer__header-footnote" text="username@mail.com"/>
-        </StackLayout>
+  <GridLayout rows="auto, *" class="nt-drawer__content">
+    <StackLayout row="0" class="nt-drawer__header">
+      <Image
+        class="nt-drawer__header-image fas t-36"
+        src.decode="font://&#xf2bd;"
+      />
+      <Label class="nt-drawer__header-brand" text="User Name" />
+      <Label class="nt-drawer__header-footnote" text="username@mail.com" />
+    </StackLayout>
 
-        <ScrollView row="1" class="nt-drawer__body">
-            <StackLayout>
-                <GridLayout columns="auto, *"
-                            :class="'nt-drawer__list-item' + (selectedPage === 'Home' ? ' -selected': '')"
-                            @tap="onNavigationItemTap(Home)">
-                    <Label col="0" text.decode="&#xf015;" class="nt-icon fas"/>
-                    <Label col="1" text="Home" class="p-r-10"/>
-                </GridLayout>
+    <ScrollView row="1" class="nt-drawer__body">
+      <StackLayout>
+        <template v-for="(item, index) in navItems">
+          <StackLayout v-if="item.gap" :key="`gap-${index}`" class="hr" />
 
-                <GridLayout columns="auto, *"
-                            :class="'nt-drawer__list-item' + (selectedPage === 'Browse' ? ' -selected': '')"
-                            @tap="onNavigationItemTap(Browse)">
-                    <Label col="0" text.decode="&#xf1ea;" class="nt-icon far"/>
-                    <Label col="1" text="Browse" class="p-r-10"/>
-                </GridLayout>
-
-                <GridLayout columns="auto, *"
-                            :class="'nt-drawer__list-item' + (selectedPage === 'Search' ? ' -selected': '')"
-                            @tap="onNavigationItemTap(Search)">
-                    <Label col="0" text.decode="&#xf002;" class="nt-icon fas"/>
-                    <Label col="1" text="Search" class="p-r-10"/>
-                </GridLayout>
-
-                <GridLayout columns="auto, *"
-                            :class="'nt-drawer__list-item' + (selectedPage === 'Featured' ? ' -selected': '')"
-                            @tap="onNavigationItemTap(Featured)">
-                    <Label col="0" text.decode="&#xf005;" class="nt-icon fas"/>
-                    <Label col="1" text="Featured" class="p-r-10"/>
-                </GridLayout>
-
-                <StackLayout class="hr"/>
-
-                <GridLayout columns="auto, *"
-                            :class="'nt-drawer__list-item' + (selectedPage === 'Settings' ? ' -selected': '')"
-                            @tap="onNavigationItemTap(Settings)">
-                    <Label col="0" text.decode="&#xf013;" class="nt-icon fas"/>
-                    <Label col="1" text="Settings" class="p-r-10"/>
-                </GridLayout>
-            </StackLayout>
-        </ScrollView>
-    </GridLayout>
+          <GridLayout
+            v-else
+            :key="`item-${index}`"
+            columns="auto, *"
+            class="nt-drawer__list-item"
+            :class="getItemClass(item)"
+            @tap="onNavigationItemTap(item.component)"
+          >
+            <Label
+              col="0"
+              :text="String.fromCharCode(item.icon)"
+              class="nt-icon fas"
+            />
+            <Label col="1" :text="item.label" class="p-r-10" />
+          </GridLayout>
+        </template>
+      </StackLayout>
+    </ScrollView>
+  </GridLayout>
 </template>
 
 <script>
-  import Home from "./Home";
-  import Browse from "./Browse";
-  import Featured from "./Featured";
-  import Search from "./Search";
-  import Settings from "./Settings";
-  import * as utils from "~/shared/utils";
-  import { SelectedPageService } from "~/shared/selected-page-service";
+import Home from "./pages/Home";
+import Browse from "./pages/Browse";
+import Featured from "./pages/Featured";
+import Search from "./pages/Search";
+import Settings from "./pages/Settings";
+import * as utils from "@/shared/utils";
+import { SelectedPageService } from "@/shared/selected-page-service";
 
-  export default {
-    mounted() {
-      SelectedPageService.getInstance().selectedPage$
-        .subscribe((selectedPage) => this.selectedPage = selectedPage);
+const ICONS = {
+  home: 0xf015,
+  newspaper: 0xf1ea,
+  search: 0xf002,
+  star: 0xf005,
+  cog: 0xf013
+};
+
+export default {
+  // components: {
+  //   Home,
+  //   Browse,
+  //   Featured,
+  //   Search,
+  //   Settings
+  // },
+  data() {
+    return {
+      Home: Home,
+      Browse: Browse,
+      Featured: Featured,
+      Search: Search,
+      Settings: Settings,
+      selectedPage: "",
+      navItems: [
+        { label: "Home", icon: ICONS.home, component: Home },
+        { label: "Browse", icon: ICONS.newspaper, component: Browse },
+        { label: "Search", icon: ICONS.search, component: Search },
+        { label: "Featured", icon: ICONS.star, component: Featured },
+        { gap: true },
+        { label: "Settings", icon: ICONS.cog, component: Settings }
+      ]
+    };
+  },
+  mounted() {
+    SelectedPageService.getInstance().selectedPage$.subscribe(
+      selectedPage => (this.selectedPage = selectedPage)
+    );
+  },
+  methods: {
+    onNavigationItemTap(component) {
+      this.$navigateTo(component, {
+        clearHistory: true
+      });
+      utils.closeDrawer();
     },
-    data() {
-      return {
-        Home: Home,
-        Browse: Browse,
-        Featured: Featured,
-        Search: Search,
-        Settings: Settings,
-        selectedPage: ""
-      };
-    },
-    components: {
-      Home,
-      Browse,
-      Featured,
-      Search,
-      Settings
-    },
-    methods: {
-      onNavigationItemTap(component) {
-        this.$navigateTo(component, {
-          clearHistory: true
-        });
-        utils.closeDrawer();
+    getItemClass(item) {
+      if (item.name === this.selectedPage) {
+        return "nt-drawer__list-item-selected";
+      } else {
+        return "nt-drawer__list-item";
       }
     }
-  };
+  }
+};
 </script>
 
 <style scoped lang="scss">
-    // Start custom common variables
-    @import '@nativescript/theme/scss/variables/blue';
-    // End custom common variables
+// Start custom common variables
+@import "@nativescript/theme/scss/variables/blue";
+// End custom common variables
 
-    // Custom styles
+// Custom styles
 </style>
