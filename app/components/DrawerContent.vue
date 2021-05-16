@@ -41,6 +41,9 @@ import Browse from "./pages/Browse";
 import Featured from "./pages/Featured";
 import Search from "./pages/Search";
 import Settings from "./pages/Settings";
+import Raw from "./pages/Raw";
+import Scanner from "./pages/Scanner";
+
 import * as utils from "@/shared/utils";
 import { SelectedPageService } from "@/shared/selected-page-service";
 
@@ -49,7 +52,9 @@ const ICONS = {
   newspaper: 0xf1ea,
   search: 0xf002,
   star: 0xf005,
-  cog: 0xf013
+  cog: 0xf013,
+  code: 0xf121,
+  barcode: 0xf02a
 };
 
 export default {
@@ -73,7 +78,9 @@ export default {
         { label: "Browse", icon: ICONS.newspaper, component: Browse },
         { label: "Search", icon: ICONS.search, component: Search },
         { label: "Featured", icon: ICONS.star, component: Featured },
+        { label: "Scanner", icon: ICONS.barcode, component: Scanner },
         { gap: true },
+        { label: "Raw", icon: ICONS.code, component: Raw },
         { label: "Settings", icon: ICONS.cog, component: Settings }
       ]
     };
