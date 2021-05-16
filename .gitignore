@@ -1,18 +1,25 @@
-*.prof
-*.pyc
-lib/
-bin/
-.cache/
-.eggs/
+# NativeScript
+hooks/
+node_modules/
+platforms/
+
+# Logs
+logs
 *.log
-*.egg-info/
-pytest-env/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
-\.idea/
-\.vscode/
+# General
+.DS_Store
+.AppleDouble
+.LSOverride
+.idea
+.cloud
+.project
+tmp/
+typings/
 
-tags
-
-*.pyd
-\.pytest_cache/v/cache/
-*config*
+# Visual Studio Code
+.vscode/*
+.editorconfig
