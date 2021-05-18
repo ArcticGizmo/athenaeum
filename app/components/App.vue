@@ -17,8 +17,7 @@
 <script>
 import DrawerContent from "./DrawerContent";
 import Home from "./pages/Home";
-import Raw from "./pages/Raw";
-import Scanner from "./pages/Scanner";
+import Books from "./pages/Books";
 import { SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 
 export default {
@@ -28,7 +27,7 @@ export default {
   },
   data() {
     return {
-      startPage: Scanner,
+      startPage: Books,
       transition: new SlideInOnTopTransition()
     };
   },

@@ -43,6 +43,7 @@ import Search from "./pages/Search";
 import Settings from "./pages/Settings";
 import Raw from "./pages/Raw";
 import Scanner from "./pages/Scanner";
+import Books from "./pages/Books"
 
 import * as utils from "@/shared/utils";
 import { SelectedPageService } from "@/shared/selected-page-service";
@@ -54,24 +55,13 @@ const ICONS = {
   star: 0xf005,
   cog: 0xf013,
   code: 0xf121,
-  barcode: 0xf02a
+  barcode: 0xf02a,
+  book: 0xf02d,
 };
 
 export default {
-  // components: {
-  //   Home,
-  //   Browse,
-  //   Featured,
-  //   Search,
-  //   Settings
-  // },
   data() {
     return {
-      Home: Home,
-      Browse: Browse,
-      Featured: Featured,
-      Search: Search,
-      Settings: Settings,
       selectedPage: "",
       navItems: [
         { label: "Home", icon: ICONS.home, component: Home },
@@ -79,6 +69,7 @@ export default {
         { label: "Search", icon: ICONS.search, component: Search },
         { label: "Featured", icon: ICONS.star, component: Featured },
         { label: "Scanner", icon: ICONS.barcode, component: Scanner },
+        {label: "Books", icon: ICONS.book, component: Books},
         { gap: true },
         { label: "Raw", icon: ICONS.code, component: Raw },
         { label: "Settings", icon: ICONS.cog, component: Settings }
