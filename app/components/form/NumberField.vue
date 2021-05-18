@@ -2,8 +2,10 @@
   <TextField
     :text="value"
     keyboardType="integer"
+    :maxLength="max"
     @blur="up('blur')"
     @textChange="up('input', $event.value)"
+    @returnPress="up('return')"
   />
 </template>
 
@@ -11,7 +13,8 @@
 export default {
   name: "StringField",
   props: {
-    value: { type: [Number, String] }
+    value: { type: [Number, String] },
+    max: { type: Number, default: Infinity }
   },
   methods: {
     up(topic, event) {

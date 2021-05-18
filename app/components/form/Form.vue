@@ -7,18 +7,20 @@
       :canError="state.allowValidation"
       :errors="state.errors"
     >
-      <!-- <StackLayout> -->
-
       <component
         :is="component"
         :bind="state"
         :value="state.value"
-        @blur="onBlur(state)"
+        @return="onBlur(state)"
         @input="validateEntry(state, $event)"
       />
-      <!-- </StackLayout> -->
     </Field>
-    <TextView :text="dataAsJson" height="auto" />
+    <!-- <TextView
+      :tabindex="0"
+      :editable="false"
+      :text="dataAsJson"
+      height="auto"
+    /> -->
   </StackLayout>
 </template>
 
@@ -46,7 +48,6 @@ export default {
     entries() {
       return Object.entries(this.value)
         .map(([key, state]) => {
-          console.dir(state);
           const component = TYPES[state.type];
           if (!component) {
             return null;
@@ -95,7 +96,8 @@ export default {
 </script>
 
 <style>
-.form .text-field {
-  color: blue;
+.form .invalid TextField {
+  color: white;
+  background-color: rgb(202, 1, 1);
 }
 </style>

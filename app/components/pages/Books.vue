@@ -47,7 +47,8 @@
 <script>
 import * as utils from "@/shared/utils";
 import { SelectedPageService } from "@/shared/selected-page-service";
-import Form from "../form/Form";
+import Form from "../form/Form.vue";
+import { validator } from "../form/form.js";
 
 function parseJson(str) {
   try {
@@ -87,18 +88,22 @@ export default {
         title: {
           type: "string",
           value: "Apples",
+          max: 255,
           validators: [
-            value => {
-              console.dir("--- validating lenth");
-              console.dir(value);
-              if (value && value.length > 3) {
-                return "Length must be less than 3";
-              }
-            }
+            validator("max-length", 255, "letters"),
+            validator("required")
           ]
         },
         // authors: {type: "List", value: []},
-        isbn: { type: "number", value: 12345 }
+        isbn: {
+          type: "number",
+          value: 12345,
+          max: 13,
+          validators: [
+            validator("min-length", 10, "digits"),
+            validator("max-length", 13, "digits")
+          ]
+        }
         // rating: {type: "Rating", value: null, min: 0, max: 10}
       },
       bookForm: defaultBookForm(),
