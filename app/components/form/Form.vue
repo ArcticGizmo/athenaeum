@@ -9,7 +9,7 @@
     >
       <component
         :is="component"
-        :bind="state"
+        v-bind="state"
         :value="state.value"
         @return="onBlur(state)"
         @input="validateEntry(state, $event)"
@@ -28,10 +28,12 @@
 import Field from "./Field";
 import NumberField from "./NumberField";
 import StringField from "./StringField";
+import ListField from "./ListField";
 
 const TYPES = {
   string: StringField,
-  number: NumberField
+  number: NumberField,
+  list: ListField
 };
 
 export default {
@@ -39,7 +41,8 @@ export default {
   components: {
     Field,
     NumberField,
-    StringField
+    StringField,
+    ListField
   },
   props: {
     value: { type: Object }

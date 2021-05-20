@@ -103,6 +103,11 @@ export default {
             validator("min-length", 10, "digits"),
             validator("max-length", 13, "digits")
           ]
+        },
+        form: {
+          type: "list",
+          value: "apple",
+          items: ["Apple", "Banana", "Cat"]
         }
         // rating: {type: "Rating", value: null, min: 0, max: 10}
       },
