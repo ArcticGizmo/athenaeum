@@ -108,6 +108,13 @@ export default {
           type: "list",
           value: "apple",
           items: ["Apple", "Banana", "Cat"]
+        },
+        rating: {
+          type: "rating",
+          value: 0.5,
+          allowHalfStars: true,
+          fillColor: "gold",
+          outlineColor: "black"
         }
         // rating: {type: "Rating", value: null, min: 0, max: 10}
       },

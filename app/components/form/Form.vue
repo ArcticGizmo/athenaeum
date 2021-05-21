@@ -29,11 +29,13 @@ import Field from "./Field";
 import NumberField from "./NumberField";
 import StringField from "./StringField";
 import ListField from "./ListField";
+import RatingField from "./RatingField";
 
 const TYPES = {
   string: StringField,
   number: NumberField,
-  list: ListField
+  list: ListField,
+  rating: RatingField
 };
 
 export default {
