@@ -1,0 +1,6 @@
+- consider swiping to allow changing of star ratings
+  - (use the touch event and on move recalculate value etc)
+- make stars scale to width
+  - might need to limit the height so that it doesnt look rediculous
+  - maxHeight that limits the max width (so it is not huge)
+  - this will potentially change how the calculation above works

@@ -101,6 +101,9 @@ export default {
 </script>
 
 <style>
+.form {
+  margin: 0 20;
+}
 .form .invalid TextField {
   color: white;
   background-color: rgb(202, 1, 1);
