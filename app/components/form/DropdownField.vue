@@ -1,6 +1,6 @@
 <template>
   <Button
-    class="list-field"
+    class="dropdown-field"
     :text="value || placeholder"
     @tap="onOpenModal()"
   />
@@ -8,7 +8,7 @@
 
 <script>
 export default {
-  name: "ListField",
+  name: "DropdownField",
   props: {
     value: undefined,
     title: { type: String, default: "Select" },
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <style>
-.list-field {
+.dropdown-field {
   background-color: cyan;
 }
 </style>

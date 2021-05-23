@@ -40,7 +40,7 @@ export default {
     emptyColor: { type: String, default: "transparent" },
     outlineColor: { type: String, default: "black" },
     borderWidth: { type: Number, default: 2 },
-    allowHalfStars: { type: Boolean, default: false }
+    allowHalves: { type: Boolean, default: false }
   },
   computed: {
     percentFilled() {
@@ -71,7 +71,7 @@ export default {
       }
     },
     onLeftClick() {
-      this.setVal(this.allowHalfStars ? 0.5 : 1);
+      this.setVal(this.allowHalves ? 0.5 : 1);
     },
     onRightClick() {
       this.setVal(1);

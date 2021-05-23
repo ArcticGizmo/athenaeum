@@ -25,29 +25,29 @@
 </template>
 
 <script>
-import Field from "./Field";
-import NumberField from "./NumberField";
-import StringField from "./StringField";
-import ListField from "./ListField";
-import RatingField from "./RatingField";
+import Field from './Field';
+import NumberField from './NumberField';
+import StringField from './StringField';
+import DropdownField from './DropdownField';
+import RatingField from './RatingField';
 
 const TYPES = {
   string: StringField,
   number: NumberField,
-  list: ListField,
-  rating: RatingField
+  dropdown: DropdownField,
+  rating: RatingField,
 };
 
 export default {
-  name: "Form",
+  name: 'Form',
   components: {
     Field,
     NumberField,
     StringField,
-    ListField
+    DropdownField,
   },
   props: {
-    value: { type: Object }
+    value: { type: Object },
   },
   computed: {
     entries() {
@@ -59,11 +59,11 @@ export default {
           }
           return [key, state, component];
         })
-        .filter(e => e);
+        .filter((e) => e);
     },
     dataAsJson() {
       return JSON.stringify(this.value || {}, null, 4);
-    }
+    },
   },
   methods: {
     onBlur(state) {
@@ -80,10 +80,10 @@ export default {
       const config = { ...state };
 
       const errors = (state.validators || [])
-        .map(val => val(value, config))
-        .filter(v => v);
+        .map((val) => val(value, config))
+        .filter((v) => v);
 
-      const isInvalid = errors.some(i => i);
+      const isInvalid = errors.some((i) => i);
 
       state.errors = errors;
       state.isInvalid = isInvalid || false;
@@ -92,11 +92,11 @@ export default {
     },
     update(state) {
       const data = this.value || {};
-      const invalid = Object.values(data).some(s => s.isInvalid);
+      const invalid = Object.values(data).some((s) => s.isInvalid);
       data.invalid = invalid;
-      this.$emit("input", { ...data });
-    }
-  }
+      this.$emit('input', { ...data });
+    },
+  },
 };
 </script>
 

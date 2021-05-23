@@ -15,7 +15,7 @@
         :emptyColor="emptyColor"
         :outlineColor="outlineColor"
         :size="size"
-        :allowHalfStars="allowHalfStars"
+        :allowHalves="allowHalves"
         @input="onChange(index, $event)"
       />
     </template>
@@ -36,7 +36,7 @@ export default {
     emptyColor: { type: String },
     outlineColor: { type: String },
     maxHeight: { type: Number, default: 75 },
-    allowHalfStars: { type: Boolean, default: false }
+    allowHalves: { type: Boolean, default: false }
   },
   data: () => {
     return {

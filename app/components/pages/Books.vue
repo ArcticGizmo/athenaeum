@@ -45,10 +45,10 @@
 </template>
 
 <script>
-import * as utils from "@/shared/utils";
-import { SelectedPageService } from "@/shared/selected-page-service";
-import Form from "../form/Form.vue";
-import { validator } from "../form/form.js";
+import * as utils from '@/shared/utils';
+import { SelectedPageService } from '@/shared/selected-page-service';
+import Form from '../form/Form.vue';
+import { validator } from '../form/form.js';
 
 function parseJson(str) {
   try {
@@ -61,67 +61,103 @@ function parseJson(str) {
 function defaultBookForm() {
   return {
     title: null,
-    authors: [""],
+    authors: [''],
     isbn: null,
     blurb: null,
     rating: { min: 0, max: 10, step: 0, value: null },
-    binding: "",
+    binding: '',
     pages: null,
     formFactor: null,
     dimensions: {
       height: { value: null, unit: null },
       width: { value: null, unit: null },
-      thickness: { value: null, unit: null }
+      thickness: { value: null, unit: null },
     },
-    notes: null
+    notes: null,
   };
 }
 
 export default {
-  name: "Books",
+  name: 'Books',
   components: {
-    Form
+    Form,
   },
   data: () => {
     return {
+      bookData: {
+        title: {
+          type: 'string',
+          value: null,
+          max: 255,
+          validators: [validator('required')],
+        },
+        authors: {
+          type: 'array',
+          value: [null],
+          min: 1,
+        },
+        isbn: {
+          type: 'number',
+          value: null,
+          max: 13,
+          validators: [
+            validator('min-length', 10, 'digits'),
+            validator('max-length', 13, 'digits'),
+          ],
+        },
+        blurb: {
+          type: 'string',
+          value: null,
+        },
+        rating: {
+          type: 'rating',
+          value: null,
+          stars: 10,
+          allowHalves: true,
+        },
+        binding: {
+          value: null,
+          type: 'dropdown',
+        },
+      },
       formData: {
         title: {
-          type: "string",
-          value: "Apples",
+          type: 'string',
+          value: 'Apples',
           max: 255,
           validators: [
-            validator("max-length", 255, "letters"),
-            validator("required")
-          ]
+            validator('max-length', 255, 'letters'),
+            validator('required'),
+          ],
         },
         // authors: {type: "List", value: []},
         isbn: {
-          type: "number",
+          type: 'number',
           value: 12345,
           max: 13,
           validators: [
-            validator("min-length", 10, "digits"),
-            validator("max-length", 13, "digits")
-          ]
+            validator('min-length', 10, 'digits'),
+            validator('max-length', 13, 'digits'),
+          ],
         },
-        form: {
-          type: "list",
-          value: "apple",
-          items: ["Apple", "Banana", "Cat"]
+        'form factor': {
+          type: 'dropdown',
+          value: 'apple',
+          items: ['Apple', 'Banana', 'Cat'],
         },
         rating: {
-          type: "rating",
+          type: 'rating',
           value: null,
           stars: 10,
-          allowHalfStars: true,
-          fillColor: "gold",
-          outlineColor: "black"
-        }
+          allowHalves: true,
+          fillColor: 'gold',
+          outlineColor: 'black',
+        },
         // rating: {type: "Rating", value: null, min: 0, max: 10}
       },
       bookForm: defaultBookForm(),
-      text: "",
-      isValid: true
+      text: '',
+      isValid: true,
     };
   },
   mounted() {
@@ -131,8 +167,8 @@ export default {
     onDrawerButtonTap() {
       utils.showDrawer();
     },
-    onCreate() {}
-  }
+    onCreate() {},
+  },
 };
 </script>
 
@@ -144,7 +180,7 @@ export default {
 
 <style scoped lang="scss">
 // Start custom common variables
-@import "@nativescript/theme/scss/variables/blue";
+@import '@nativescript/theme/scss/variables/blue';
 // End custom common variables
 
 // Custom styles
