@@ -1,5 +1,6 @@
 <template>
   <TextField
+    class="string-field"
     :text="value"
     :maxLength="max"
     :bind="bindings"
@@ -11,11 +12,11 @@
 
 <script>
 export default {
-  name: "StringField",
+  name: 'StringField',
   props: {
     value: { type: [String, Number] },
     keyboardType: { type: String, default: null },
-    max: { type: Number, default: Infinity }
+    max: { type: Number, default: Infinity },
   },
   computed: {
     bindings() {
@@ -23,12 +24,18 @@ export default {
         return { keyboardType: this.keyboardType };
       }
       return {};
-    }
+    },
   },
   methods: {
     up(topic, event) {
       this.$emit(topic, event);
-    }
-  }
+    },
+  },
 };
 </script>
+
+<style>
+.string-field {
+  width: 100%;
+}
+</style>

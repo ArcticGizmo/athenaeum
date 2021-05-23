@@ -46,8 +46,11 @@ export default {
 </script>
 
 <style>
-.measurement-field TextField,
-.measurement-field Button {
-  font-size: 20;
+.measurement-field {
+  height: 45;
+}
+
+.measurement-field button {
+  text-transform: lowercase;
 }
 </style>

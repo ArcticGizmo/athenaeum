@@ -88,10 +88,6 @@ export default {
   border-color: #dedede;
   border-width: 1;
 }
-
-.raw-textarea.invalid {
-  border-color: darkred;
-}
 </style>
 
 <style scoped lang="scss">

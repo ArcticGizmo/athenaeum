@@ -30,14 +30,20 @@ export default {
 </script>
 
 <style>
+.field {
+  margin-top: 20;
+}
+
 .field > label {
-  font-size: 30;
-  color: orange;
+  font-size: 22;
+  color: black;
   text-transform: capitalize;
+  font-weight: bold;
 }
 
 .field > .validation-error {
   color: red;
   margin-left: 20;
+  font-size: 16;
 }
 </style>

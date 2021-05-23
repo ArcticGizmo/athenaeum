@@ -10,7 +10,8 @@ const VALIDATORS = {
     return result(length > max, `Must be less than ${max} ${kind}`);
   },
   required: () => value => result(value == null || value === "", "Required"),
-  "is-number": () => value => result(!isNumber(value), "Must be a number")
+  "is-number": () => value => result(!isNumber(value), "Must be a number"),
+  positive: () => value => result(value < 0, "Must be positive")
 };
 
 function result(bool, value) {
