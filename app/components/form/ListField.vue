@@ -13,6 +13,7 @@
         @textChange="onTextChange(index, $event)"
       />
       <Label
+        v-if="value.length > min"
         col="1"
         :text="String.fromCharCode(crossIcon)"
         class="nt-icon fas"
@@ -21,6 +22,7 @@
 
     <Button
       v-if="value.length < max"
+      horizontalAlignment="right"
       :text="`${addText || 'Add'}`"
       @tap="onAddEmpty()"
     />
@@ -31,18 +33,18 @@
 const CROSS_ICON = 0xf00d;
 
 export default {
-  name: 'ListField',
+  name: "ListField",
   props: {
     value: { type: Array, default: () => [] },
     min: { type: Number, default: 0 },
     max: { type: Number, default: Infinity },
-    placeholder: { type: String, default: '' },
-    addText: { type: String, default: '' },
-    hinter: { type: Function, default: () => [] },
+    placeholder: { type: String, default: "" },
+    addText: { type: String, default: "" },
+    hinter: { type: Function, default: () => [] }
   },
   data: () => {
     return {
-      crossIcon: CROSS_ICON,
+      crossIcon: CROSS_ICON
     };
   },
   methods: {
@@ -53,7 +55,7 @@ export default {
     },
     onAddEmpty() {
       const newList = this.value.slice();
-      newList.push('');
+      newList.push("");
       this.setValue(newList);
     },
     onRemoveItem(index) {
@@ -62,22 +64,27 @@ export default {
       this.setValue(newList);
     },
     setValue(value) {
-      this.$emit('input', value);
-    },
-  },
+      this.$emit("input", value);
+    }
+  }
 };
 </script>
 
 <style>
 .list-field TextField {
   font-size: 18;
+  width: 100%;
 }
 
 .list-field label {
   height: 100%;
+  margin-left: 10;
 }
 
 .list-field button {
-  background-color: green;
+  height: 45;
+  width: 80;
+  margin: 0;
+  padding: 0;
 }
 </style>
