@@ -15,12 +15,12 @@
         @input="validateEntry(state, $event)"
       />
     </Field>
-    <!-- <TextView
+    <TextView
       :tabindex="0"
       :editable="false"
       :text="dataAsJson"
       height="auto"
-    /> -->
+    />
   </StackLayout>
 </template>
 
@@ -30,12 +30,16 @@ import NumberField from './NumberField';
 import StringField from './StringField';
 import DropdownField from './DropdownField';
 import RatingField from './RatingField';
+import ListField from './ListField';
+import MeasurementField from './MeasurementField';
 
 const TYPES = {
   string: StringField,
   number: NumberField,
   dropdown: DropdownField,
   rating: RatingField,
+  list: ListField,
+  measure: MeasurementField,
 };
 
 export default {
@@ -45,6 +49,8 @@ export default {
     NumberField,
     StringField,
     DropdownField,
+    ListField,
+    MeasurementField,
   },
   props: {
     value: { type: Object },
@@ -53,7 +59,7 @@ export default {
     entries() {
       return Object.entries(this.value)
         .map(([key, state]) => {
-          const component = TYPES[state.type];
+          const component = state.component || TYPES[state.type];
           if (!component) {
             return null;
           }

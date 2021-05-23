@@ -18,13 +18,13 @@ export default {
   },
   methods: {
     onOpenModal(event) {
-      let options = {
+      let opts = {
         title: this.title,
         cancelButtonText: this.cancelText,
         actions: this.items
       };
 
-      action(options).then(result => {
+      action(opts).then(result => {
         if (result === this.cancelText) {
           return;
         }

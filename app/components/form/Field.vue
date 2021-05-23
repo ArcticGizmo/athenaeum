@@ -1,6 +1,6 @@
 <template>
   <StackLayout class="field" :class="{ invalid: invalid }">
-    <Label class="label" :text="label" />
+    <Label :text="label" />
     <slot></slot>
     <template v-if="canError">
       <Label
@@ -30,9 +30,10 @@ export default {
 </script>
 
 <style>
-.field > .label {
-  font-size: 26;
+.field > label {
+  font-size: 30;
   color: orange;
+  text-transform: capitalize;
 }
 
 .field > .validation-error {

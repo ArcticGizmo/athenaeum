@@ -1,6 +1,5 @@
 <template>
   <StackLayout
-    ref="container"
     class="rating-field"
     orientation="horizontal"
     horizontalAlignment="center"
@@ -78,7 +77,7 @@ export default {
 
 <style>
 .rating-field {
-  margin: auto;
+  margin: 20 0;
   width: 90%;
 }
 </style>

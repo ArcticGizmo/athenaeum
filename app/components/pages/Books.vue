@@ -119,6 +119,11 @@ export default {
           value: null,
           type: 'dropdown',
         },
+        pages: {
+          type: 'number',
+          value: null,
+          validators: [validator('required')],
+        },
       },
       formData: {
         title: {
@@ -130,7 +135,7 @@ export default {
             validator('required'),
           ],
         },
-        // authors: {type: "List", value: []},
+        authors: { type: 'list', value: [''] },
         isbn: {
           type: 'number',
           value: 12345,
@@ -153,7 +158,11 @@ export default {
           fillColor: 'gold',
           outlineColor: 'black',
         },
-        // rating: {type: "Rating", value: null, min: 0, max: 10}
+        width: {
+          type: 'measure',
+          value: { unit: 'cm' },
+          units: ['cm', 'mm', 'inch'],
+        },
       },
       bookForm: defaultBookForm(),
       text: '',
