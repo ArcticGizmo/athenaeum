@@ -111,7 +111,8 @@ export default {
         },
         rating: {
           type: "rating",
-          value: 0.5,
+          value: null,
+          stars: 10,
           allowHalfStars: true,
           fillColor: "gold",
           outlineColor: "black"
