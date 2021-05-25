@@ -4,6 +4,7 @@
     :text="value"
     keyboardType="integer"
     :maxLength="max"
+    returnKeyType="done"
     @blur="up('blur')"
     @textChange="up('input', $event.value)"
     @returnPress="up('return')"

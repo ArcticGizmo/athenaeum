@@ -4,6 +4,7 @@
       col="0"
       keyboardType="integer"
       :value="value.measure"
+      returnKeyType="done"
       @textChange="onTextChange"
     />
 

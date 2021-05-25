@@ -10,6 +10,7 @@
         col="0"
         :value="text"
         :placeholder="placeholder"
+        returnKeyType="done"
         @textChange="onTextChange(index, $event)"
       />
       <Label
