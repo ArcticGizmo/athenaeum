@@ -1,6 +1,7 @@
 import Vue from "nativescript-vue";
 import RadSideDrawer from "nativescript-ui-sidedrawer/vue";
-
+import App from "./components/App";
+import store from "./code/store";
 import { Toaster } from "@/code/toaster";
 
 Vue.registerElement(
@@ -12,7 +13,7 @@ Vue.use(RadSideDrawer);
 
 Vue.prototype.$toaster = new Toaster();
 
-import App from "./components/App";
+Vue.prototype.$store = store;
 
 Vue.config.silent = !__DEV__;
 

@@ -9,10 +9,16 @@
       </GridLayout>
     </ActionBar>
 
-    <GridLayout class="page__content">
+    <ScrollView orientation="vertical">
+      <!-- may want to use a list view here instead -->
+      <StackLayout>
+        <Label v-for="(book, index) in books" :key="index" :text="book.title" />
+      </StackLayout>
+    </ScrollView>
+    <!-- <GridLayout class="page__content">
       <Label class="page__content-icon fas" text.decode="&#xf015;" />
       <Label class="page__content-placeholder" :text="message" />
-    </GridLayout>
+    </GridLayout> -->
   </Page>
 </template>
 
@@ -25,8 +31,8 @@ export default {
     SelectedPageService.getInstance().updateSelectedPage("Home");
   },
   computed: {
-    message() {
-      return "<!-- Page content goes here -->";
+    books() {
+      return this.$store.books;
     }
   },
   methods: {

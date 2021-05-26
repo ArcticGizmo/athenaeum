@@ -15,33 +15,34 @@
 </template>
 
 <script>
-import DrawerContent from './DrawerContent';
-import Home from './pages/Home';
-import Books from './pages/Books';
-import { SlideInOnTopTransition } from 'nativescript-ui-sidedrawer';
+import DrawerContent from "./DrawerContent";
+import Home from "./pages/Home";
+import Books from "./pages/Books";
+import { SlideInOnTopTransition } from "nativescript-ui-sidedrawer";
 
 export default {
   components: {
     DrawerContent,
-    Home,
+    Home
   },
   data() {
     return {
       startPage: Books,
-      transition: new SlideInOnTopTransition(),
+      transition: new SlideInOnTopTransition()
     };
   },
   mounted() {
+    this.$store.load();
     this.$navigateTo(this.startPage, {
-      clearHistory: true,
+      clearHistory: true
     });
-  },
+  }
 };
 </script>
 
 <style scoped lang="scss">
 // Start custom common variables
-@import '@nativescript/theme/scss/variables/blue';
+@import "@nativescript/theme/scss/variables/blue";
 // End custom common variables
 
 // Custom styles

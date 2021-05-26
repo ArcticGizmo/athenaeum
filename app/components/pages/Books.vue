@@ -118,43 +118,43 @@ export default {
       utils.showDrawer();
     },
     onScan() {
-      scan().then(resp => setTimeout(() => this.handleScan(resp), 1000));
-    },
-    handleScan(scanResult) {
-      const isbn = scanResult.text;
-
-      let opts = {
-        title: "ISBN Found!",
-        okButtonText: "Fetch",
-        cancelButtonText: "Cancel",
-        neutralButtonText: "Retry"
-      };
-
-      confirm(opts).then(resp => {
-        if (resp === true) {
-          this.fetchBook(isbn);
-          return;
-        }
-
-        if (resp === undefined) {
-          this.onScan();
-        }
-      });
+      scan().then(resp => this.fetchBook(resp.text));
     },
     fetchBook(isbn) {
-      getByISBN(isbn).then(book => {
-        this.bookData.title.value = book.title;
-        this.bookData.isbn.value = book.isbn;
-        if ((book.authors || []).length) {
-          this.bookData.authors.value = book.authors;
-        }
-        this.bookData.blurb.value = book.blurb;
-        this.bookData.pages.value = book.pages;
-      });
+      this.$toaster.info("Fetching book info ...");
+      getByISBN(isbn)
+        .then(book => {
+          this.$toaster.info("Complete!");
+          this.bookData.title.value = book.title;
+          this.bookData.isbn.value = book.isbn;
+          console.dir(book.authors);
+          if ((book.authors || []).length) {
+            this.bookData.authors.value = book.authors;
+          }
+          this.bookData.blurb.value = book.blurb;
+          this.bookData.pages.value = book.pages;
+        })
+        .catch(() => {
+          this.$toaster.error("Something went wrong");
+        });
     },
     onSubmit() {
-      const isbn = "9781547604319";
-      getByISBN(isbn).then(book => console.dir(book));
+      // need to do a validation check here
+      const book = {
+        title: this.bookData.title.value,
+        authors: this.bookData.authors.value,
+        isbn: this.bookData.isbn.value,
+        blurb: this.bookData.blurb.value,
+        rating: this.bookData.rating.value,
+        binding: this.bookData.binding.value,
+        pages: this.bookData.pages.value,
+        height: this.bookData.height.value,
+        width: this.bookData.width.value,
+        thickness: this.bookData.thickness.value,
+        notes: this.bookData.notes.value
+      };
+
+      this.$store.addBook(book);
     }
   }
 };
