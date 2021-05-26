@@ -686,6 +686,13 @@
   "resolved" "https://registry.npmjs.org/atob/-/atob-2.1.2.tgz"
   "version" "2.1.2"
 
+"axios@^0.21.1":
+  "integrity" "sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA=="
+  "resolved" "https://registry.npmjs.org/axios/-/axios-0.21.1.tgz"
+  "version" "0.21.1"
+  dependencies:
+    "follow-redirects" "^1.10.0"
+
 "babel-loader@8.2.2":
   "integrity" "sha512-JvTd0/D889PQBtUXJ2PXaKU/pjZDMtHA9V2ecm+eNRmmBCMR09a+fmpGTNwnJtFmFl5Ei7Vy47LjBb+L0wQ99g=="
   "resolved" "https://registry.npmjs.org/babel-loader/-/babel-loader-8.2.2.tgz"
@@ -1398,6 +1405,11 @@
   "resolved" "https://registry.npmjs.org/flatted/-/flatted-3.1.1.tgz"
   "version" "3.1.1"
 
+"follow-redirects@^1.10.0":
+  "integrity" "sha512-HWqDgT7ZEkqRzBvc2s64vSZ/hfOceEol3ac/7tKwzuvEyWx3/4UegXh5oBOIotkGsObyk3xznnSRVADBgWSQVg=="
+  "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.14.1.tgz"
+  "version" "1.14.1"
+
 "fork-ts-checker-webpack-plugin@6.2.1":
   "integrity" "sha512-Pyhn2kav/Y2g6I7aInABgcph/B78jjdXc4kGHzaAUBL4UVthknxM6aMH47JwpnuTJmdOuf6p5vMbIahsBHuWGg=="
   "resolved" "https://registry.npmjs.org/fork-ts-checker-webpack-plugin/-/fork-ts-checker-webpack-plugin-6.2.1.tgz"
@@ -2004,6 +2016,11 @@
   "integrity" "sha512-XU6ybkzwXsjaqS0WJ3oEgettGXKDw+0sPGyQ2jNE4UKCdGSAedufn5U3q2x9j5v16qQnFvj3lhS2fXc9XjAlKA=="
   "resolved" "https://registry.npmjs.org/nativescript-barcodescanner/-/nativescript-barcodescanner-4.1.1.tgz"
   "version" "4.1.1"
+
+"nativescript-toasts@^1.0.3":
+  "integrity" "sha1-rFhEpA0rWAO4MPLmdHkzR7jM62E="
+  "resolved" "https://registry.npmjs.org/nativescript-toasts/-/nativescript-toasts-1.0.3.tgz"
+  "version" "1.0.3"
 
 "nativescript-ui-core@~4.0.0":
   "integrity" "sha512-YbGZApyI84RGSevCmXVD18yGov7/RJyLcIXXx6p2y4WM41hL+uRxyUak/9qLP2vwSSy0bCZKXFoyYwsIcf8EoA=="

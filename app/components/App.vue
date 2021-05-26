@@ -47,7 +47,7 @@ export default {
 // Custom styles
 button {
   font-size: 18;
-  background-color: dodgerblue;
+  background-color: cadetblue;
   color: white;
   text-transform: capitalize;
 }

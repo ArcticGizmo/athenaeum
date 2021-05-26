@@ -11,7 +11,11 @@
 
     <!-- need to make a add new vs update collection option -->
     <ScrollView orientation="vertical">
-      <Form v-model="formData" />
+      <StackLayout>
+        <Button class="scanner" text="Scan" @tap="onScan()" />
+        <Form v-model="bookData" />
+        <Button class="submit" text="Create" @tap="onSubmit()" />
+      </StackLayout>
     </ScrollView>
   </Page>
 </template>
@@ -21,6 +25,8 @@ import * as utils from "@/shared/utils";
 import { SelectedPageService } from "@/shared/selected-page-service";
 import Form from "../form/Form.vue";
 import { validator } from "../form/form.js";
+import { getByISBN } from "@/code/google.js";
+import { scan } from "@/code/scanner.js";
 
 function parseJson(str) {
   try {
@@ -30,29 +36,12 @@ function parseJson(str) {
   }
 }
 
-function defaultBookForm() {
-  return {
-    title: null,
-    authors: [""],
-    isbn: null,
-    blurb: null,
-    rating: { min: 0, max: 10, step: 0, value: null },
-    binding: "",
-    pages: null,
-    formFactor: null,
-    dimensions: {
-      height: { value: null, unit: null },
-      width: { value: null, unit: null },
-      thickness: { value: null, unit: null },
-    },
-    notes: null,
-  };
-}
+const UNITS = ["cm", "mm", "inch"];
 
 export default {
   name: "Books",
   components: {
-    Form,
+    Form
   },
   data: () => {
     return {
@@ -61,12 +50,12 @@ export default {
           type: "string",
           value: null,
           max: 255,
-          validators: [validator("required")],
+          validators: [validator("required")]
         },
         authors: {
           type: "array",
-          value: [null],
-          min: 1,
+          value: [""],
+          min: 1
         },
         isbn: {
           type: "number",
@@ -74,102 +63,51 @@ export default {
           max: 13,
           validators: [
             validator("min-length", 10, "digits"),
-            validator("max-length", 13, "digits"),
-          ],
+            validator("max-length", 13, "digits")
+          ]
         },
         blurb: {
           type: "string",
-          value: null,
+          value: null
         },
         rating: {
           type: "rating",
           value: null,
           stars: 10,
-          allowHalves: true,
+          allowHalves: true
         },
         binding: {
           value: null,
-          type: "dropdown",
+          type: "dropdown"
         },
         pages: {
           type: "number",
           value: null,
-          validators: [validator("required")],
+          validators: [validator("required")]
         },
         height: {
           type: "measure",
+          units: UNITS,
           value: { measure: null, unit: "cm" },
-          validators: [validator("required")],
+          validators: [validator("required")]
         },
         width: {
           type: "measure",
+          unit: UNITS,
           value: { measure: null, unit: "cm" },
-          validators: [validator("required")],
+          validators: [validator("required")]
         },
         thickness: {
           type: "measure",
+          unit: UNITS,
           value: { measure: null, unit: "cm" },
-          validators: [validator("required")],
+          validators: [validator("required")]
         },
         notes: {
           type: "string",
-          value: null,
-        },
-      },
-      formData: {
-        title: {
-          type: "string",
-          value: "Apples",
-          max: 255,
-          validators: [
-            validator("max-length", 255, "letters"),
-            validator("required"),
-          ],
-        },
-        authors: {
-          type: "list",
-          value: [""],
-          min: 1,
-          valiators: [validator("required")],
-        },
-        isbn: {
-          type: "number",
-          value: 12345,
-          max: 13,
-          validators: [
-            validator("min-length", 10, "digits"),
-            validator("max-length", 13, "digits"),
-          ],
-        },
-        "form factor": {
-          type: "dropdown",
-          value: "apple",
-          items: ["Apple", "Banana", "Cat"],
-        },
-        rating: {
-          type: "rating",
-          value: null,
-          stars: 5,
-          maxHeight: 50,
-          allowHalves: true,
-          fillColor: "gold",
-          outlineColor: "black",
-        },
-        width: {
-          type: "measure",
-          value: { unit: "cm" },
-          units: ["cm", "mm", "inch"],
-          validators: [validator("required"), validator("positive")],
-        },
-        height: {
-          type: "measure",
-          value: { unit: "cm" },
-          units: ["cm", "mm", "inch"],
-        },
-      },
-      bookForm: defaultBookForm(),
-      text: "",
-      isValid: true,
+          value: null
+        }
+      }
     };
   },
   mounted() {
@@ -179,16 +117,48 @@ export default {
     onDrawerButtonTap() {
       utils.showDrawer();
     },
-    onCreate() {},
-  },
+    onScan() {
+      scan().then(resp => setTimeout(() => this.handleScan(resp), 1000));
+    },
+    handleScan(scanResult) {
+      const isbn = scanResult.text;
+
+      let opts = {
+        title: "ISBN Found!",
+        okButtonText: "Fetch",
+        cancelButtonText: "Cancel",
+        neutralButtonText: "Retry"
+      };
+
+      confirm(opts).then(resp => {
+        if (resp === true) {
+          this.fetchBook(isbn);
+          return;
+        }
+
+        if (resp === undefined) {
+          this.onScan();
+        }
+      });
+    },
+    fetchBook(isbn) {
+      getByISBN(isbn).then(book => {
+        this.bookData.title.value = book.title;
+        this.bookData.isbn.value = book.isbn;
+        if ((book.authors || []).length) {
+          this.bookData.authors.value = book.authors;
+        }
+        this.bookData.blurb.value = book.blurb;
+        this.bookData.pages.value = book.pages;
+      });
+    },
+    onSubmit() {
+      const isbn = "9781547604319";
+      getByISBN(isbn).then(book => console.dir(book));
+    }
+  }
 };
 </script>
-
-<style>
-.books-page .key {
-  font-size: 26;
-}
-</style>
 
 <style scoped lang="scss">
 // Start custom common variables
@@ -196,4 +166,11 @@ export default {
 // End custom common variables
 
 // Custom styles
+.books-page .scanner {
+  margin: 20 10;
+}
+
+.books-page .submit {
+  margin: 35 10;
+}
 </style>

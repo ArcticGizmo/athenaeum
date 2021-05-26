@@ -96,6 +96,9 @@ export default {
 
       this.update();
     },
+    validate() {
+      
+    },
     update(state) {
       const data = this.value || {};
       const invalid = Object.values(data).some(s => s.isInvalid);
