@@ -14,6 +14,7 @@
       <StackLayout>
         <Label v-for="(book, index) in books" :key="index" :text="book.title" />
       </StackLayout>
+      <Button text="Modal" @tap="openModal()" />
     </ScrollView>
     <!-- <GridLayout class="page__content">
       <Label class="page__content-icon fas" text.decode="&#xf015;" />
@@ -23,29 +24,33 @@
 </template>
 
 <script>
-import * as utils from "@/shared/utils";
-import { SelectedPageService } from "@/shared/selected-page-service";
+import * as utils from '@/shared/utils';
+import { SelectedPageService } from '@/shared/selected-page-service';
+import ConfirmModal from '../modals/ConfirmModal.vue';
 
 export default {
   mounted() {
-    SelectedPageService.getInstance().updateSelectedPage("Home");
+    SelectedPageService.getInstance().updateSelectedPage('Home');
   },
   computed: {
     books() {
       return this.$store.books;
-    }
+    },
   },
   methods: {
     onDrawerButtonTap() {
       utils.showDrawer();
-    }
-  }
+    },
+    openModal() {
+      this.$modalBus.open(ConfirmModal, { message: 'Message' });
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
 // Start custom common variables
-@import "@nativescript/theme/scss/variables/blue";
+@import '@nativescript/theme/scss/variables/blue';
 // End custom common variables
 
 // Custom styles

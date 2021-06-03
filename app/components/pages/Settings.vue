@@ -18,17 +18,17 @@
 </template>
 
 <script>
-import * as utils from "@/shared/utils";
-import { SelectedPageService } from "@/shared/selected-page-service";
+import * as utils from '@/shared/utils';
+import { SelectedPageService } from '@/shared/selected-page-service';
 
 export default {
   mounted() {
-    SelectedPageService.getInstance().updateSelectedPage("Settings");
+    SelectedPageService.getInstance().updateSelectedPage('Settings');
   },
   computed: {
     message() {
-      return "<!-- Page content goes here -->";
-    }
+      return '<!-- Page content goes here -->';
+    },
   },
   methods: {
     onDrawerButtonTap() {
@@ -36,15 +36,15 @@ export default {
     },
     onDestoryLibrary() {
       this.$store.deleteAll();
-      this.$toaster.info("Library was burnt down !")
-    }
-  }
+      this.$toaster.info('Library was burnt down !');
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
 // Start custom common variables
-@import "@nativescript/theme/scss/variables/blue";
+@import '@nativescript/theme/scss/variables/blue';
 // End custom common variables
 
 // Custom styles
