@@ -33,8 +33,7 @@
 </template>
 
 <script>
-import RatingField from './form/RatingField.vue';
-const BOOK_ICON = 0xf02d;
+import RatingField from '../../form/RatingField.vue';
 
 export default {
   name: 'BookCard',
@@ -43,11 +42,6 @@ export default {
   },
   props: {
     book: { type: Object, default: () => ({}) },
-  },
-  data: () => {
-    return {
-      bookIcon: BOOK_ICON,
-    };
   },
   computed: {
     status() {
