@@ -1,35 +1,22 @@
 <template>
   <Layout :pages="pages" />
-  <!-- <GridLayout rows="90 *">
-    <RadSideDrawer
-      rowSpan="2"
-      ref="drawer"
-      drawerLocation="Left"
-      gesturesEnabled="true"
-      :drawerTransition="transition"
-    >
-      <StackLayout ~drawerContent backgroundColor="#ffffff">
-        <DrawerContent />
-      </StackLayout>
-
-      <Frame ~mainContent ref="drawerMainContent">
-        <component :is="startPage" />
-      </Frame>
-    </RadSideDrawer>
-
-    <ModalManager rowSpan="2" @tap.native="onCloseDrawer()" />
-    <GridLayout row="0" @tap="openDrawer()" />
-  </GridLayout> -->
 </template>
 
 <script>
-import Home from './pages/Home';
-import Books from './pages/Books';
 import Layout from './layout/Layout.vue';
 
+import Home from './pages/Home';
+import Books from './pages/Books';
+import Scanner from './pages/Scanner';
+import Settings from './pages/Settings.vue';
+
 const PAGES = [
-  { name: 'Home', component: Home },
-  { name: 'Books', component: Books },
+  { name: 'Home', component: Home, icon: 'home' },
+  { name: 'Books', component: Books, icon: 'book' },
+  'gap',
+  { name: 'Add Book', component: Scanner, icon: 'barcode' },
+  'gap',
+  { name: 'Settings', component: Settings, icon: 'cog' },
 ];
 
 export default {
@@ -44,7 +31,6 @@ export default {
   mounted() {
     this.$store.load();
   },
-  methods: {},
 };
 </script>
 

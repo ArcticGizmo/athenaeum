@@ -21,7 +21,6 @@ export default {
       }
     },
     onOpen() {
-      console.dir('--- open')
       this.$emit('open');
     },
   },

@@ -46,7 +46,7 @@ export default {
     },
   },
   mounted() {
-    console.dir(this.book);
+    // console.dir(this.book);
   },
 };
 </script>

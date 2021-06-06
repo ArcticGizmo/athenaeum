@@ -1,11 +1,12 @@
 <template>
   <Frame>
     <Page class="zz-layout-page">
-      <Header @open="onOpen()" />
+      <Header :title="title" @open="onOpen()" />
+
       <GridLayout>
         <!-- content -->
         <StackLayout class="zz-content">
-          <CLabel text="Apples and all the other fuit and stuff" />
+          <component v-if="page" :is="page.component" />
         </StackLayout>
 
         <!-- drawer/sidebar -->
@@ -34,6 +35,11 @@ export default {
       drawerOpen: false,
       page: null,
     };
+  },
+  computed: {
+    title() {
+      return (this.page || {}).name;
+    },
   },
   mounted() {
     const firstPage = this.pages[0];
