@@ -13,6 +13,7 @@
         <Drawer :show="drawerOpen" :pages="pages" @close="onDrawerClose" />
 
         <!-- modals here -->
+        <ModalManager />
       </GridLayout>
     </Page>
   </Frame>
@@ -21,11 +22,13 @@
 <script>
 import Header from './Header.vue';
 import Drawer from './Drawer.vue';
+import ModalManager from '../modals/ModalManager';
 export default {
   name: 'Layout',
   components: {
     Header,
     Drawer,
+    ModalManager,
   },
   props: {
     pages: { type: Array, default: () => [] },
