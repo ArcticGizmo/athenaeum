@@ -1,13 +1,15 @@
 <template>
   <Frame>
-    <Page class="zz-layout-page">
-      <Header :title="title" @open="onOpen()" />
-
+    <Page class="zz-layout-page" :actionBarHidden="true">
       <GridLayout>
-        <!-- content -->
-        <StackLayout class="zz-content">
-          <component v-if="page" :is="page.component" />
-        </StackLayout>
+        <GridLayout rows="60 *">
+          <!-- header -->
+          <Header :title="title" @open="onOpen()" />
+          <!-- content -->
+          <StackLayout row="1" class="zz-content">
+            <component v-if="page" :is="page.component" />
+          </StackLayout>
+        </GridLayout>
 
         <!-- drawer/sidebar -->
         <Drawer :show="drawerOpen" :pages="pages" @close="onDrawerClose" />

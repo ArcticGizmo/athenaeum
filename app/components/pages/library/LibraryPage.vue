@@ -3,16 +3,11 @@
     <StackLayout>
       <!-- filters -->
       <Search v-model="searchText" hint="Search Library ..." />
-      <FlexboxLayout class="filters" orientation="horizontal" justifyContent="space-around">
-        <Button
-          v-for="[key, selected] in Object.entries(filters)"
-          :class="{ selected }"
-          :key="key"
-          :text="key"
-          :textWrap="false"
-          @tap="toggleFilter(key)"
-        />
-      </FlexboxLayout>
+      <GridLayout class="filters" columns="* *">
+        <Button col="0" text="Shelf" />
+        <!-- this should show what it is being sorted by and an arrow to change direction -->
+        <Button col="1" text="Sort By" />
+      </GridLayout>
 
       <!-- books -->
       <BookCard v-for="(book, index) in books" :key="index" :book="book" />
@@ -35,12 +30,9 @@ export default {
   data: () => {
     return {
       searchText: '',
-      filters: {
-        owned: true,
-        wishlist: true,
-        lent: true,
-        borrowed: true,
-      },
+      shelves: [],
+      sortByKey: [],
+      sortAsc: true,
     };
   },
   computed: {
@@ -56,8 +48,10 @@ export default {
         // this.$store.addBook(book);
       });
     },
-    toggleFilter(key) {
-      this.filters[key] = !this.filters[key];
+    onOpenShelf() {},
+    onOpenSort() {},
+    onToggleSortDirection() {
+      this.sortAsc = !this.sortAsc;
     },
   },
 };
@@ -65,18 +59,11 @@ export default {
 
 <style>
 .library-page .filters {
-  margin: 0;
-  padding: 0;
+  height: 45;
+  margin: 0 10;
 }
 
 .library-page .filters button {
-  padding: 0;
-  height: 50;
-  font-size: 14;
-  background-color: gray;
-}
-
-.library-page .filters button.selected {
-  background-color: cadetblue;
+  margin: 0;
 }
 </style>
