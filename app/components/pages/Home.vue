@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     books() {
-      return this.$store.books;
+      return [this.$store.books[0]];
     },
   },
   methods: {

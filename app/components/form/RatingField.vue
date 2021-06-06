@@ -7,12 +7,13 @@
   >
     <template v-if="show">
       <Star
-        v-for="index in stars"
+        v-for="(value, index) in formattedStars"
         :key="index"
-        :value="getStarValue(index)"
+        :value="value"
         :fillColor="fillColor"
         :emptyColor="emptyColor"
         :outlineColor="outlineColor"
+        :hideIfEmpty="hideIfEmpty"
         :size="size"
         :allowHalves="allowHalves"
         @input="onChange(index, $event)"
@@ -22,6 +23,7 @@
 </template>
 
 <script>
+import { repeat } from '~/code/helpers';
 import Star from './Star.vue';
 export default {
   name: 'RatingField',
@@ -36,12 +38,30 @@ export default {
     outlineColor: { type: String },
     maxHeight: { type: Number, default: 75 },
     allowHalves: { type: Boolean, default: false },
+    hideIfEmpty: { type: Boolean, default: false },
   },
   data: () => {
     return {
       show: false,
       size: 50,
     };
+  },
+  computed: {
+    formattedStars() {
+      return repeat(this.stars).map((_, min) => {
+        const max = min + 1;
+
+        if (this.value > max) {
+          return 1;
+        }
+
+        if (this.value > min) {
+          return this.value - min;
+        }
+
+        return 0;
+      });
+    },
   },
   methods: {
     onLoaded(event) {
@@ -61,15 +81,6 @@ export default {
 
         this.size = starSize > this.maxHeight ? this.maxHeight : starSize;
       });
-    },
-    getStarValue(index) {
-      if (!this.value) {
-        return 0;
-      }
-
-      const remainingValue = this.value - index + 1;
-
-      return remainingValue > 1 ? 1 : remainingValue;
     },
     onChange(index, startValue) {
       const totalVal = index - 1 + startValue;

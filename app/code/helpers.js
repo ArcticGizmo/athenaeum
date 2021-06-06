@@ -14,3 +14,7 @@ export function attributeFromList(items, matchKey, matchValue, retKey) {
 
   return !item ? item : item[retKey];
 }
+
+export function repeat(count) {
+  return [...Array(count)];
+}

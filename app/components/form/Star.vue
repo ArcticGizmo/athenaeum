@@ -1,12 +1,7 @@
 <template>
-  <GridLayout
-    class="star"
-    :width="size"
-    :height="size"
-    rows="* *"
-    columns="3* 2*"
-  >
+  <GridLayout class="star" :width="size" :height="size" rows="* *" columns="3* 2*">
     <Label
+      v-if="show"
       class="symbol"
       :style="symbolStyle"
       :borderColor="outlineColor"
@@ -32,41 +27,45 @@ function eventIsWithin(event) {
 }
 
 export default {
-  name: "Star",
+  name: 'Star',
   props: {
     value: { type: Number, default: 0 },
     size: { type: Number, default: 75 },
-    fillColor: { type: String, default: "gold" },
-    emptyColor: { type: String, default: "transparent" },
-    outlineColor: { type: String, default: "black" },
-    borderWidth: { type: Number, default: 2 },
-    allowHalves: { type: Boolean, default: false }
+    fillColor: { type: String, default: 'gold' },
+    emptyColor: { type: String, default: 'transparent' },
+    outlineColor: { type: String, default: 'black' },
+    borderWidth: { type: Number, default: 0.5 },
+    allowHalves: { type: Boolean, default: false },
+    hideIfEmpty: { type: Boolean, default: false },
   },
   computed: {
+    show() {
+      return this.value || !this.hideIfEmpty;
+    },
     percentFilled() {
       const val = this.value;
       if (!val || val < 0) {
-        return "0%";
+        return '0%';
       }
 
       if (val > 1) {
-        return "100%";
+        return '100%';
       }
 
       return `${val * 100}%`;
     },
     symbolStyle() {
       return {
-        background: `linear-gradient(90deg, ${this.fillColor} ${this.percentFilled}, ${this.emptyColor} ${this.percentFilled})`
+        background: `linear-gradient(90deg, ${this.fillColor} ${this.percentFilled}, ${this.emptyColor} ${this.percentFilled})`,
       };
-    }
+    },
   },
   methods: {
     setVal(val) {
-      this.$emit("input", val);
+      this.$emit('input', val);
     },
     onTouch(event, callback) {
-      if (event.action === "up" && eventIsWithin(event)) {
+      if (event.action === 'up' && eventIsWithin(event)) {
         callback();
       }
     },
@@ -75,8 +74,8 @@ export default {
     },
     onRightClick() {
       this.setVal(1);
-    }
-  }
+    },
+  },
 };
 </script>
 
