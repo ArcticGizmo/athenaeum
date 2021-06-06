@@ -21,110 +21,94 @@
 </template>
 
 <script>
-import * as utils from "@/shared/utils";
-import { SelectedPageService } from "@/shared/selected-page-service";
-import Form from "../form/Form.vue";
-import { validator } from "../form/form.js";
-import { getByISBN } from "@/code/google.js";
-import { scan } from "@/code/scanner.js";
+import Form from '../form/Form.vue';
+import { validator } from '../form/form.js';
+import { getByISBN } from '@/code/google.js';
+import { scan } from '@/code/scanner.js';
 
-function parseJson(str) {
-  try {
-    return JSON.parse(str);
-  } catch (e) {
-    return undefined;
-  }
-}
-
-const UNITS = ["cm", "mm", "inch"];
+const UNITS = ['cm', 'mm', 'inch'];
 
 export default {
-  name: "Books",
+  name: 'Books',
   components: {
-    Form
+    Form,
   },
   data: () => {
     return {
       bookData: {
         title: {
-          type: "string",
+          type: 'string',
           value: null,
           max: 255,
-          validators: [validator("required")]
+          validators: [validator('required')],
         },
         authors: {
-          type: "array",
-          value: [""],
-          min: 1
+          type: 'array',
+          value: [''],
+          min: 1,
         },
         isbn: {
-          type: "number",
+          type: 'number',
           value: null,
           max: 13,
           validators: [
-            validator("min-length", 10, "digits"),
-            validator("max-length", 13, "digits")
-          ]
+            validator('min-length', 10, 'digits'),
+            validator('max-length', 13, 'digits'),
+          ],
         },
         blurb: {
-          type: "string",
-          value: null
+          type: 'string',
+          value: null,
         },
         rating: {
-          type: "rating",
+          type: 'rating',
           value: null,
           stars: 10,
-          allowHalves: true
+          allowHalves: true,
         },
         binding: {
           value: null,
-          type: "dropdown"
+          type: 'dropdown',
         },
         pages: {
-          type: "number",
+          type: 'number',
           value: null,
-          validators: [validator("required")]
+          validators: [validator('required')],
         },
         height: {
-          type: "measure",
+          type: 'measure',
           units: UNITS,
-          value: { measure: null, unit: "cm" },
-          validators: [validator("required")]
+          value: { measure: null, unit: 'cm' },
+          validators: [validator('required')],
         },
         width: {
-          type: "measure",
+          type: 'measure',
           unit: UNITS,
-          value: { measure: null, unit: "cm" },
-          validators: [validator("required")]
+          value: { measure: null, unit: 'cm' },
+          validators: [validator('required')],
         },
         thickness: {
-          type: "measure",
+          type: 'measure',
           unit: UNITS,
-          value: { measure: null, unit: "cm" },
-          validators: [validator("required")]
+          value: { measure: null, unit: 'cm' },
+          validators: [validator('required')],
         },
         notes: {
-          type: "string",
-          value: null
-        }
-      }
+          type: 'string',
+          value: null,
+        },
+      },
     };
   },
-  mounted() {
-    SelectedPageService.getInstance().updateSelectedPage(this.name);
-  },
   methods: {
-    onDrawerButtonTap() {
-      utils.showDrawer();
-    },
     onScan() {
       scan().then(resp => this.fetchBook(resp.text));
     },
     fetchBook(isbn) {
-      this.$toaster.info("Fetching book info ...");
+      this.$toaster.info('Fetching book info ...');
       getByISBN(isbn)
         .then(book => {
-          this.$toaster.info("Complete!");
+          this.$toaster.info('Complete!');
           this.bookData.title.value = book.title;
           this.bookData.isbn.value = book.isbn;
           console.dir(book.authors);
@@ -135,7 +119,7 @@ export default {
           this.bookData.pages.value = book.pages;
         })
         .catch(() => {
-          this.$toaster.error("Something went wrong");
+          this.$toaster.error('Something went wrong');
         });
     },
     onSubmit() {
@@ -151,18 +135,18 @@ export default {
         height: this.bookData.height.value,
         width: this.bookData.width.value,
         thickness: this.bookData.thickness.value,
-        notes: this.bookData.notes.value
+        notes: this.bookData.notes.value,
       };
 
       this.$store.addBook(book);
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped lang="scss">
 // Start custom common variables
-@import "@nativescript/theme/scss/variables/blue";
+@import '@nativescript/theme/scss/variables/blue';
 // End custom common variables
 
 // Custom styles

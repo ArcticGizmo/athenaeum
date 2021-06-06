@@ -1,47 +1,35 @@
 <template>
-  <GridLayout>
-    <RadSideDrawer
-      ref="drawer"
-      drawerLocation="Left"
-      gesturesEnabled="true"
-      :drawerTransition="transition"
-    >
-      <StackLayout ~drawerContent backgroundColor="#ffffff">
-        <DrawerContent />
-        <ModalManager />
-      </StackLayout>
-      <Frame ~mainContent ref="drawerMainContent">
-        <Home />
-      </Frame>
-    </RadSideDrawer>
-    <ModalManager />
-  </GridLayout>
+  <Layout :pages="pages" />
 </template>
 
 <script>
-import DrawerContent from './DrawerContent';
+import Layout from './layout/Layout.vue';
+
 import Home from './pages/Home';
 import Books from './pages/Books';
-import { SlideInOnTopTransition } from 'nativescript-ui-sidedrawer';
-import ModalManager from './modals/ModalManager.vue';
+import Scanner from './pages/Scanner';
+import Settings from './pages/Settings.vue';
+
+const PAGES = [
+  { name: 'Home', component: Home, icon: 'home' },
+  { name: 'Books', component: Books, icon: 'book' },
+  'gap',
+  { name: 'Add Book', component: Scanner, icon: 'barcode' },
+  'gap',
+  { name: 'Settings', component: Settings, icon: 'cog' },
+];
 
 export default {
   components: {
-    DrawerContent,
-    Home,
-    ModalManager,
+    Layout,
   },
   data() {
     return {
-      startPage: Home,
-      transition: new SlideInOnTopTransition(),
+      pages: PAGES,
     };
   },
   mounted() {
     this.$store.load();
-    this.$navigateTo(this.startPage, {
-      clearHistory: true,
-    });
   },
 };
 </script>

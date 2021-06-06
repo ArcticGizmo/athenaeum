@@ -22,11 +22,11 @@
 </template>
 
 <script>
-import Star from "./Star.vue";
+import Star from './Star.vue';
 export default {
-  name: "RatingField",
+  name: 'RatingField',
   components: {
-    Star
+    Star,
   },
   props: {
     value: { type: Number, default: 0 },
@@ -35,24 +35,28 @@ export default {
     emptyColor: { type: String },
     outlineColor: { type: String },
     maxHeight: { type: Number, default: 75 },
-    allowHalves: { type: Boolean, default: false }
+    allowHalves: { type: Boolean, default: false },
   },
   data: () => {
     return {
       show: false,
-      size: 50
+      size: 50,
     };
   },
   methods: {
     onLoaded(event) {
       setTimeout(() => {
         this.show = true;
-        const totalWidth = event.object.getActualSize().width;
+        const { width, height } = event.object.getActualSize();
 
-        const starSize = Math.trunc(totalWidth / this.stars);
+        let starSize = Math.trunc(width / this.stars);
 
         if (starSize === 0) {
           return;
+        }
+
+        if (starSize > height) {
+          starSize = height;
         }
 
         this.size = starSize > this.maxHeight ? this.maxHeight : starSize;
@@ -69,15 +73,15 @@ export default {
     },
     onChange(index, startValue) {
       const totalVal = index - 1 + startValue;
-      this.$emit("input", totalVal);
-    }
-  }
+      this.$emit('input', totalVal);
+    },
+  },
 };
 </script>
 
 <style>
 .rating-field {
-  margin: 20 0;
+  /* margin: 20 0; */
   width: 90%;
 }
 </style>
