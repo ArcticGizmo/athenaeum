@@ -5,20 +5,18 @@
     horizontalAlignment="center"
     @loaded="onLoaded"
   >
-    <template v-if="show">
-      <Star
-        v-for="(value, index) in formattedStars"
-        :key="index"
-        :value="value"
-        :fillColor="fillColor"
-        :emptyColor="emptyColor"
-        :outlineColor="outlineColor"
-        :hideIfEmpty="hideIfEmpty"
-        :size="size"
-        :allowHalves="allowHalves"
-        @input="onChange(index, $event)"
-      />
-    </template>
+    <Star
+      v-for="(value, index) in formattedStars"
+      :key="index"
+      :value="value"
+      :fillColor="fillColor"
+      :emptyColor="emptyColor"
+      :outlineColor="outlineColor"
+      :hideIfEmpty="hideIfEmpty"
+      :size="size"
+      :allowHalves="allowHalves"
+      @input="onChange(index, $event)"
+    />
   </StackLayout>
 </template>
 
@@ -42,7 +40,6 @@ export default {
   },
   data: () => {
     return {
-      show: false,
       size: 50,
     };
   },
@@ -66,7 +63,6 @@ export default {
   methods: {
     onLoaded(event) {
       setTimeout(() => {
-        this.show = true;
         const { width, height } = event.object.getActualSize();
 
         let starSize = Math.trunc(width / this.stars);
@@ -76,14 +72,14 @@ export default {
         }
 
         if (starSize > height) {
-          starSize = height;
+          starSize = Math.trunc(height);
         }
 
         this.size = starSize > this.maxHeight ? this.maxHeight : starSize;
       });
     },
-    onChange(index, startValue) {
-      const totalVal = index - 1 + startValue;
+    onChange(index, starValue) {
+      const totalVal = index + starValue;
       this.$emit('input', totalVal);
     },
   },
