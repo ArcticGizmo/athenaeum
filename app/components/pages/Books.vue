@@ -51,7 +51,7 @@ export default {
         rating: {
           type: 'rating',
           value: null,
-          stars: 10,
+          stars: 5,
           allowHalves: true,
         },
         binding: {
