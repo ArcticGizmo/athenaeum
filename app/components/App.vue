@@ -12,7 +12,7 @@ import Settings from './pages/Settings.vue';
 
 const PAGES = [
   { name: 'Home', component: Home, icon: 'home' },
-  { name: 'Books', component: Books, icon: 'book' },
+  { name: 'Books', component: Books, icon: 'book', default: true },
   'gap',
   { name: 'Add Book', component: Scanner, icon: 'barcode' },
   'gap',

@@ -70,7 +70,7 @@ export default {
 }
 
 .drawer .item {
-  height: 45;
+  height: 50;
   padding: 0 20;
 }
 

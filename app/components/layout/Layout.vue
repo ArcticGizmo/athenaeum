@@ -42,7 +42,8 @@ export default {
     },
   },
   mounted() {
-    const firstPage = this.pages[0];
+    const firstPage =
+      this.pages.find(p => p.default) || this.pages.filter(p => typeof p !== 'string')[0];
     if (firstPage) {
       this.page = firstPage;
     }

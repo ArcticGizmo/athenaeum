@@ -1,23 +1,11 @@
 <template>
-  <Page class="page books-page">
-    <ActionBar class="action-bar">
-      <NavigationButton visibility="hidden" />
-      <GridLayout columns="50, *">
-        <Label class="action-bar-title" text="Books" colSpan="2" />
-
-        <Label class="fas" text.decode="&#xf0c9;" @tap="onDrawerButtonTap" />
-      </GridLayout>
-    </ActionBar>
-
-    <!-- need to make a add new vs update collection option -->
-    <ScrollView orientation="vertical">
-      <StackLayout>
-        <Button class="scanner" text="Scan" @tap="onScan()" />
-        <Form v-model="bookData" />
-        <Button class="submit" text="Create" @tap="onSubmit()" />
-      </StackLayout>
-    </ScrollView>
-  </Page>
+  <ScrollView class="books-page" orientation="vertical">
+    <StackLayout>
+      <Button class="scanner" text="Scan" @tap="onScan()" />
+      <Form v-model="bookData" />
+      <Button class="submit" text="Create" @tap="onSubmit()" />
+    </StackLayout>
+  </ScrollView>
 </template>
 
 <script>
@@ -29,7 +17,7 @@ import { scan } from '@/code/scanner.js';
 const UNITS = ['cm', 'mm', 'inch'];
 
 export default {
-  name: 'Books',
+  name: 'BooksPage',
   components: {
     Form,
   },
