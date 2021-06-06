@@ -9,7 +9,7 @@
         </StackLayout>
 
         <!-- drawer/sidebar -->
-        <Drawer :show="drawerOpen" @close="onDrawerClose" />
+        <Drawer :show="drawerOpen" :pages="pages" @close="onDrawerClose" />
 
         <!-- modals here -->
       </GridLayout>
@@ -36,7 +36,10 @@ export default {
     };
   },
   mounted() {
-    this.page = this.pages[0];
+    const firstPage = this.pages[0];
+    if (firstPage) {
+      this.page = firstPage;
+    }
   },
   methods: {
     onOpen() {

@@ -1,5 +1,5 @@
 <template>
-  <Layout />
+  <Layout :pages="pages" />
   <!-- <GridLayout rows="90 *">
     <RadSideDrawer
       rowSpan="2"
@@ -23,42 +23,28 @@
 </template>
 
 <script>
-import DrawerContent from './DrawerContent';
 import Home from './pages/Home';
 import Books from './pages/Books';
-import { SlideInOnTopTransition } from 'nativescript-ui-sidedrawer';
-import ModalManager from './modals/ModalManager.vue';
 import Layout from './layout/Layout.vue';
+
+const PAGES = [
+  { name: 'Home', component: Home },
+  { name: 'Books', component: Books },
+];
 
 export default {
   components: {
     Layout,
-    DrawerContent,
-    Home,
-    ModalManager,
   },
   data() {
     return {
-      drawerOpen: false,
-      startPage: Home,
-      transition: new SlideInOnTopTransition(),
+      pages: PAGES,
     };
   },
   mounted() {
     this.$store.load();
   },
-  methods: {
-    openDrawer() {
-      this.$refs.drawer.showDrawer();
-      this.drawerOpen = true;
-    },
-    onCloseDrawer() {
-      if (this.drawerOpen) {
-        this.$refs.drawer.closeDrawer();
-        this.drawerOpen = false;
-      }
-    },
-  },
+  methods: {},
 };
 </script>
 
