@@ -12,7 +12,11 @@ const ICONS = decodeMap({
   code: 0xf121,
   barcode: 0xf02a,
   book: 0xf02d,
+  'open-book': 0xf518,
+  'book-reader': 0xf5da,
+  bookmark: 0xf02e,
   bars: 0xf0c9,
+  filter: 0xf0b0,
 });
 
 function decodeMap(icons) {
