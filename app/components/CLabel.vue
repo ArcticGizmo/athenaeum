@@ -1,5 +1,5 @@
 <template>
-  <Label class="c-label" v-bind="$props" @loaded="onLoaded" />
+  <Label class="c-label" v-bind="$props" @loaded="onLoaded" @tap="emit('tap', $event)" />
 </template>
 
 <script>
@@ -21,6 +21,9 @@ export default {
       if (isAndroid) {
         event.object.nativeView.setGravity(16 | (ANDROID_CENTERING[this.textAlignment] || 0));
       }
+    },
+    emit(topic, payload) {
+      this.$emit(topic, payload);
     },
   },
 };

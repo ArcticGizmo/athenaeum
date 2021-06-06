@@ -5,6 +5,7 @@ import store from './code/store';
 import { Toaster } from '@/code/toaster';
 import { ModalBus } from './components/modals/modalBus';
 import CLabel from './components/CLabel.vue';
+import Icon from './components/Icon.vue';
 
 Vue.registerElement(
   'BarcodeScanner',
@@ -12,7 +13,8 @@ Vue.registerElement(
 );
 
 Vue.use(RadSideDrawer);
-Vue.component('CLabel',CLabel)
+Vue.component('CLabel', CLabel);
+Vue.component('Icon', Icon);
 
 Vue.prototype.$toaster = new Toaster();
 
