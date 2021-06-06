@@ -5,14 +5,14 @@
 <script>
 import Layout from './layout/Layout.vue';
 
-import Home from './pages/Home';
-import Books from './pages/Books';
+import Home from './pages/home/Home';
 import Scanner from './pages/Scanner';
 import Settings from './pages/Settings.vue';
+import LibraryPage from './pages/library/LibraryPage.vue';
 
 const PAGES = [
   { name: 'Home', component: Home, icon: 'home' },
-  { name: 'Books', component: Books, icon: 'book', default: true },
+  { name: 'Library', component: LibraryPage, icon: 'book', default: true },
   'gap',
   { name: 'Add Book', component: Scanner, icon: 'barcode' },
   'gap',
