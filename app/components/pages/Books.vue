@@ -99,7 +99,6 @@ export default {
           this.$toaster.info('Complete!');
           this.bookData.title.value = book.title;
           this.bookData.isbn.value = book.isbn;
-          console.dir(book.authors);
           if ((book.authors || []).length) {
             this.bookData.authors.value = book.authors;
           }

@@ -74,8 +74,6 @@ class Store {
 
   addBook(raw) {
     const book = toBook(nextId(), raw, UNITS);
-    console.dir("----- book crated");
-    console.dir(book);
     const books = this._books.slice();
     books.push(book);
 

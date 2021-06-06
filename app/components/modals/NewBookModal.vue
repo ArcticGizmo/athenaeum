@@ -5,7 +5,7 @@
       <Form v-model="bookData" />
       <GridLayout class="actions" columns="* *">
         <Button col="0" text="Create" @tap="onSubmit()" />
-        <Button col="1" text="Cancel" @tap="onClose()" />
+        <Button col="1" text="Cancel" @tap="close()" />
       </GridLayout>
     </StackLayout>
   </ScrollView>
@@ -105,7 +105,6 @@ export default {
           this.$toaster.info('Complete!');
           this.bookData.title.value = book.title;
           this.bookData.isbn.value = book.isbn;
-          console.dir(book.authors);
           if ((book.authors || []).length) {
             this.bookData.authors.value = book.authors;
           }
