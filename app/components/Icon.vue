@@ -17,6 +17,7 @@ const ICONS = decodeMap({
   bookmark: 0xf02e,
   bars: 0xf0c9,
   filter: 0xf0b0,
+  check: 0xf00c,
 });
 
 function decodeMap(icons) {
