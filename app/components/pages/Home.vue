@@ -12,9 +12,8 @@
     <ScrollView orientation="vertical">
       <!-- may want to use a list view here instead -->
       <StackLayout>
-        <Label v-for="(book, index) in books" :key="index" :text="book.title" />
+        <BookCard v-for="(book, index) in books" :key="index" :book="book" @tap.native="onTap()" />
       </StackLayout>
-      <Button text="Modal" @tap="openModal()" />
     </ScrollView>
     <!-- <GridLayout class="page__content">
       <Label class="page__content-icon fas" text.decode="&#xf015;" />
@@ -26,23 +25,28 @@
 <script>
 import * as utils from '@/shared/utils';
 import { SelectedPageService } from '@/shared/selected-page-service';
+import BookCard from '../BookCard.vue';
 import ConfirmModal from '../modals/ConfirmModal.vue';
 
 export default {
-  mounted() {
-    SelectedPageService.getInstance().updateSelectedPage('Home');
+  components: {
+    BookCard,
   },
   computed: {
     books() {
       return this.$store.books;
     },
   },
+  mounted() {
+    SelectedPageService.getInstance().updateSelectedPage('Home');
+  },
   methods: {
     onDrawerButtonTap() {
       utils.showDrawer();
     },
-    openModal() {
-      this.$modalBus.open(ConfirmModal, { message: 'Message' });
+    onTap() {
+      console.dir('--- apple')
+      this.$modalBus.open(ConfirmModal, { message: 'egg' });
     },
   },
 };
