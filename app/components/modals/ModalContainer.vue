@@ -1,11 +1,12 @@
 <template>
   <StackLayout
     v-if="component"
+    ref="container"
     class="modal-container"
     width="100%"
     height="100%"
     verticalAlignment="center"
-    @touch="onTouch($event)"
+    @touch="onTouch"
   >
     <component
       ref="child"
@@ -13,7 +14,7 @@
       :class="extraClasses"
       v-bind="props"
       :is="component"
-      @touch.native="onTouch($event)"
+      @touch.native="onTouch"
       @close="onClose"
     />
   </StackLayout>
@@ -51,14 +52,15 @@ export default {
   },
   methods: {
     onTouch(event) {
-      if (this.disableOuterClose) {
+      if (this.disableOuterClose || event.action === 'move') {
         return;
       }
 
       const child = this.$refs.child.nativeView;
+      const container = this.$refs.container.nativeView;
 
       // if the click involves the child, ignore
-      if (!child || event.vuew === child) {
+      if (!child || event.view === child) {
         this.touchStartedInOuter = false;
         return;
       }
@@ -66,7 +68,7 @@ export default {
       const point = { x: event.getX(), y: event.getY() };
 
       if (event.action === 'down') {
-        if (!isWithinView(point, child)) {
+        if (event.view === container && !isWithinView(point, child)) {
           this.touchStartedInOuter = true;
         }
         return;
