@@ -1,29 +1,25 @@
 <template>
   <GridLayout v-show="show" class="drawer" columns="200 *">
-    <StackLayout col="0" class="left">
-      <GridLayout columns="* *" rows="* * * *" height="100">
-        <Icon class="book-icon" icon="book" row="0" rowSpan="4" col="0" />
-        <CLabel row="0" col="1" text="Read: --" textAlignment="left" />
-        <CLabel row="1" col="1" text="Owned: --" textAlignment="left" />
-        <CLabel row="2" col="1" text="Whishlist: --" textAlignment="left" />
-        <CLabel row="3" col="1" text="Lent: -- " textAlignment="left" />
-      </GridLayout>
+    <transition name="slide-in-left">
+      <StackLayout v-show="show" col="0" class="left">
+        <GridLayout columns="* *" rows="* * * *" height="100">
+          <Icon class="book-icon" icon="book" row="0" rowSpan="4" col="0" />
+          <CLabel row="0" col="1" text="Read: --" textAlignment="left" />
+          <CLabel row="1" col="1" text="Owned: --" textAlignment="left" />
+          <CLabel row="2" col="1" text="Whishlist: --" textAlignment="left" />
+          <CLabel row="3" col="1" text="Lent: -- " textAlignment="left" />
+        </GridLayout>
 
-      <StackLayout class="separator" />
+        <StackLayout class="separator" />
 
-      <CLabel text="apple" />
+        <CLabel text="apple" />
 
-      <!-- all given books -->
-      <ScrollView> </ScrollView>
-    </StackLayout>
-    <StackLayout col="1" class="right" @tap="onClose()">
-      <!-- a summary of your librarb -->
-      <!-- total books -->
-      <!-- read hours -->
-      <!-- whishlist -->
+        <!-- all given books -->
+        <ScrollView> </ScrollView>
+      </StackLayout>
+    </transition>
 
-      <!-- all drawers -->
-    </StackLayout>
+    <StackLayout col="1" class="right" @tap="onClose()" />
   </GridLayout>
 </template>
 
@@ -46,12 +42,12 @@ export default {
 </script>
 
 <style>
-.drawer .left {
-  background-color: white;
+.drawer {
+  background-color: transparent;
 }
 
-.drawer .right {
-  background-color: rgba(0, 0, 0, 0.05);
+.drawer .left {
+  background-color: white;
 }
 
 .drawer .book-icon {
@@ -64,5 +60,24 @@ export default {
   margin: 0 20;
   border-top-width: 1;
   border-top-color: black;
+}
+
+.slide-in-left-enter-active {
+  animation-name: slide-in-left;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+
+@keyframes slide-in-left {
+  from {
+    transform: translate3d(-100%, 0, 0);
+    visibility: visible;
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
 }
 </style>
