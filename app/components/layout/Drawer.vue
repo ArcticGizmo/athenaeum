@@ -5,7 +5,7 @@
         <StackLayout v-show="show" col="0" class="left">
           <!-- info/header section -->
           <GridLayout class="info" columns="2* 3*" rows="* * * *" height="100">
-            <Icon class="book-icon" icon="book" row="0" rowSpan="4" col="0" />
+            <Icon class="book-icon" icon="book-reader" row="0" rowSpan="4" col="0" />
             <CLabel row="0" col="1" text="Read: --" textAlignment="left" />
             <CLabel row="1" col="1" text="Owned: --" textAlignment="left" />
             <CLabel row="2" col="1" text="Whishlist: --" textAlignment="left" />
