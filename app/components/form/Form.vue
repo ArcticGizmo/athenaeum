@@ -15,23 +15,17 @@
         @input="validateEntry(state, $event)"
       />
     </Field>
-    <!-- <TextView
-      :tabindex="0"
-      :editable="false"
-      :text="dataAsJson"
-      height="auto"
-    /> -->
   </StackLayout>
 </template>
 
 <script>
-import Field from "./Field";
-import NumberField from "./NumberField";
-import StringField from "./StringField";
-import DropdownField from "./DropdownField";
-import RatingField from "./RatingField";
-import ListField from "./ListField";
-import MeasurementField from "./MeasurementField";
+import Field from './Field';
+import NumberField from './NumberField';
+import StringField from './StringField';
+import DropdownField from './DropdownField';
+import RatingField from './RatingField';
+import ListField from './ListField';
+import MeasurementField from './MeasurementField';
 
 const TYPES = {
   string: StringField,
@@ -39,21 +33,21 @@ const TYPES = {
   dropdown: DropdownField,
   rating: RatingField,
   list: ListField,
-  measure: MeasurementField
+  measure: MeasurementField,
 };
 
 export default {
-  name: "Form",
+  name: 'Form',
   components: {
     Field,
     NumberField,
     StringField,
     DropdownField,
     ListField,
-    MeasurementField
+    MeasurementField,
   },
   props: {
-    value: { type: Object }
+    value: { type: Object },
   },
   computed: {
     entries() {
@@ -69,7 +63,7 @@ export default {
     },
     dataAsJson() {
       return JSON.stringify(this.value || {}, null, 4);
-    }
+    },
   },
   methods: {
     onBlur(state) {
@@ -85,9 +79,7 @@ export default {
 
       const config = { ...state };
 
-      const errors = (state.validators || [])
-        .map(val => val(value, config))
-        .filter(v => v);
+      const errors = (state.validators || []).map(val => val(value, config)).filter(v => v);
 
       const isInvalid = errors.some(i => i);
 
@@ -96,16 +88,14 @@ export default {
 
       this.update();
     },
-    validate() {
-      
-    },
-    update(state) {
+    validate() {},
+    update() {
       const data = this.value || {};
       const invalid = Object.values(data).some(s => s.isInvalid);
       data.invalid = invalid;
-      this.$emit("input", { ...data });
-    }
-  }
+      this.$emit('input', { ...data });
+    },
+  },
 };
 </script>
 
