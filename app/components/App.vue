@@ -1,6 +1,8 @@
 <template>
-  <GridLayout>
+  <Layout />
+  <!-- <GridLayout rows="90 *">
     <RadSideDrawer
+      rowSpan="2"
       ref="drawer"
       drawerLocation="Left"
       gesturesEnabled="true"
@@ -8,14 +10,16 @@
     >
       <StackLayout ~drawerContent backgroundColor="#ffffff">
         <DrawerContent />
-        <ModalManager />
       </StackLayout>
+
       <Frame ~mainContent ref="drawerMainContent">
-        <Home />
+        <component :is="startPage" />
       </Frame>
     </RadSideDrawer>
-    <ModalManager />
-  </GridLayout>
+
+    <ModalManager rowSpan="2" @tap.native="onCloseDrawer()" />
+    <GridLayout row="0" @tap="openDrawer()" />
+  </GridLayout> -->
 </template>
 
 <script>
@@ -24,24 +28,36 @@ import Home from './pages/Home';
 import Books from './pages/Books';
 import { SlideInOnTopTransition } from 'nativescript-ui-sidedrawer';
 import ModalManager from './modals/ModalManager.vue';
+import Layout from './layout/Layout.vue';
 
 export default {
   components: {
+    Layout,
     DrawerContent,
     Home,
     ModalManager,
   },
   data() {
     return {
+      drawerOpen: false,
       startPage: Home,
       transition: new SlideInOnTopTransition(),
     };
   },
   mounted() {
     this.$store.load();
-    this.$navigateTo(this.startPage, {
-      clearHistory: true,
-    });
+  },
+  methods: {
+    openDrawer() {
+      this.$refs.drawer.showDrawer();
+      this.drawerOpen = true;
+    },
+    onCloseDrawer() {
+      if (this.drawerOpen) {
+        this.$refs.drawer.closeDrawer();
+        this.drawerOpen = false;
+      }
+    },
   },
 };
 </script>
