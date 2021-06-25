@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "axios/dist/axios";
 
 const BASE = "https://www.googleapis.com/books/v1/volumes";
 
