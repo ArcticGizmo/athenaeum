@@ -15,10 +15,10 @@
           @tap="option.selected = !option.selected"
         />
       </GridLayout>
-      <StackLayout orientation="horizontal" horizontalAlignment="right">
-        <Button text="Cancel" @tap="onClose()" />
-        <Button text="Ok" @tap="onSubmit()" />
-      </StackLayout>
+      <GridLayout columns="* *">
+        <Button col="0" text="Cancel" @tap="onClose()" />
+        <Button col="1" text="Ok" @tap="onSubmit()" />
+      </GridLayout>
     </StackLayout>
   </ScrollView>
 </template>
