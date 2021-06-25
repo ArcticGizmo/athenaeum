@@ -17,7 +17,6 @@ export default {
     cancelText: { type: String, default: 'Cancel' },
     items: { type: Array, default: () => [] },
     placeholder: { type: String, default: '' },
-    addCallback: { type: Function, default: null },
   },
   data: () => {
     return {

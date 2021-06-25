@@ -84,8 +84,10 @@ export default {
   },
   methods: {
     onOpenNewBook() {
-      this.$modalBus.open(NewBookModal).onClose(resp => {
-        this.$store.addBook(book);
+      this.$modalBus.open(NewBookModal).onClose(book => {
+        if (resp) {
+          this.$store.addBook(book);
+        }
       });
     },
     onOpenShelf() {

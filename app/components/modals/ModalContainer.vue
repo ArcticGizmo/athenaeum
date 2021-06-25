@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { Application, AndroidApplication } from '@nativescript/core';
+
 function getDimensions(view) {
   const { width, height } = view.getActualSize();
   const { x, y } = view.getLocationOnScreen();
@@ -49,6 +51,13 @@ export default {
     return {
       touchStartedInOuter: false,
     };
+  },
+  mounted() {
+    // overide back button
+    Application.android.on(AndroidApplication.activityBackPressedEvent, args => {
+      args.cancel = true;
+      this.onClose();
+    });
   },
   methods: {
     onTouch(event) {
