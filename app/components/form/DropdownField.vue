@@ -6,6 +6,7 @@
 </template>
 
 <script>
+import SelectModal from '../modals/SelectModal.vue';
 const CHEVRON_UP = 0xf077;
 
 export default {
@@ -16,6 +17,7 @@ export default {
     cancelText: { type: String, default: 'Cancel' },
     items: { type: Array, default: () => [] },
     placeholder: { type: String, default: '' },
+    addCallback: { type: Function, default: null },
   },
   data: () => {
     return {
@@ -23,18 +25,17 @@ export default {
     };
   },
   methods: {
-    onOpenModal(event) {
-      let opts = {
+    onOpenModal() {
+      const opts = {
         title: this.title,
-        cancelButtonText: this.cancelText,
-        actions: this.items,
+        options: this.items,
+        allowAdd: true,
       };
 
-      action(opts).then((result) => {
-        if (result === this.cancelText) {
-          return;
+      this.$modalBus.open(SelectModal, opts).onClose(resp => {
+        if (resp !== undefined) {
+          this.$emit('input', resp);
         }
-        this.$emit('input', result);
       });
     },
   },
@@ -45,7 +46,6 @@ export default {
 .dropdown-field {
   width: 100%;
 }
-
 
 .dropdown-field button {
   width: 100%;
