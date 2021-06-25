@@ -4,6 +4,7 @@ import App from './components/App';
 import store from './code/store';
 import { Toaster } from '@/code/toaster';
 import { ModalBus } from './components/modals/modalBus';
+import { Keyboard } from '@/code/keyboard';
 import CLabel from './components/CLabel.vue';
 import Icon from './components/Icon.vue';
 
@@ -21,6 +22,8 @@ Vue.prototype.$toaster = new Toaster();
 Vue.prototype.$store = store;
 
 Vue.prototype.$modalBus = new ModalBus();
+
+Vue.prototype.$keyboard = Vue.observable(new Keyboard());
 
 Vue.config.silent = !__DEV__;
 
