@@ -11,6 +11,8 @@ const UNITS = [
 
 const BOOKS = "disk: books";
 const BINDINGS = "disk: bindings";
+const FORMATS = 'disk: formats';
+const SERIES = 'disk: series';
 
 let ID = 1;
 function nextId() {
@@ -34,6 +36,8 @@ function removeFromDisk(key) {
 class Store {
   constructor() {
     this._bindings = [];
+    this._series = [];
+    this._formats = [];
     this._books = [];
     this.load();
   }
@@ -57,6 +61,14 @@ class Store {
 
   get units() {
     return UNITS;
+  }
+
+  get series() {
+    return this._series;
+  }
+
+  get formats() {
+    return this._formats;
   }
 
   get books() {
@@ -96,7 +108,9 @@ class Store {
     this.saveBooks(books);
   }
 
-  addBinding(binding) {}
+  addBinding(binding) {
+    
+  }
 
   removeBinding(binding) {
     // this will need to remove it from all other books
