@@ -12,6 +12,7 @@
       <!-- books -->
       <BookCard v-for="(book, index) in books" :key="index" :book="book" />
       <Button text="Add Book" @tap="onOpenNewBook()" />
+      <Button text="Test" @tap="onTest()" />
       <!-- <Button v-if="searchText.length > minSearchLength" text="Add Book" @tap="onOpenNewBook()" /> -->
     </StackLayout>
   </ScrollView>
@@ -23,6 +24,7 @@ import Search from '../../Search.vue';
 import NewBookModal from '~/components/modals/NewBookModal.vue';
 import MultiSelectModal from '~/components/modals/MultiSelectModal.vue';
 import ConfirmModal from '~/components/modals/ConfirmModal.vue';
+import SearchableDropdownModalVue from '~/components/modals/SearchableDropdownModal.vue';
 /*
 binding
 - hardcover
@@ -85,7 +87,7 @@ export default {
   methods: {
     onOpenNewBook() {
       this.$modalBus.open(NewBookModal).onClose(book => {
-        if (resp) {
+        if (book) {
           this.$store.addBook(book);
         }
       });
@@ -111,6 +113,13 @@ export default {
     },
     onToggleSortDirection() {
       this.sortAsc = !this.sortAsc;
+    },
+    onTest() {
+      const opts = {
+        options: ['Apple', 'Banana', 'Eggplant', 'The big panda'],
+      };
+
+      this.$modalBus.open(SearchableDropdownModalVue, opts);
     },
   },
 };
