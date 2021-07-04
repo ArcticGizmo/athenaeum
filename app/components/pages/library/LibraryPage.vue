@@ -2,7 +2,7 @@
   <ScrollView class="library-page" orientation="vertical">
     <StackLayout>
       <!-- filters -->
-      <Search v-model="searchText" hint="Search Library ..." />
+      <SearchBar v-model="searchText" hint="Search Library ..." />
       <GridLayout class="filters" columns="* *">
         <Button col="0" :text="selectedShelfText" @tap="onOpenShelf()" />
         <!-- this should show what it is being sorted by and an arrow to change direction -->
@@ -20,7 +20,7 @@
 
 <script>
 import BookCard from './BookCard.vue';
-import Search from '../../Search.vue';
+import SearchBar from '../../SearchBar.vue';
 import NewBookModal from '~/components/modals/NewBookModal.vue';
 import MultiSelectModal from '~/components/modals/MultiSelectModal.vue';
 import ConfirmModal from '~/components/modals/ConfirmModal.vue';
@@ -45,7 +45,7 @@ export default {
   name: 'LibraryPage',
   components: {
     BookCard,
-    Search,
+    SearchBar,
   },
   data: () => {
     const shelves = ['owned', 'lent', 'wishlist', 'borrowed'];

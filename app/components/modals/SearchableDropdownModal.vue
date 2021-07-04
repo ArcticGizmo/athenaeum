@@ -2,7 +2,7 @@
   <ScrollView class="searchable-dropdown-modal">
     <StackLayout class="content">
       <!-- searchbox -->
-      <Search ref="search" v-model="text" :hint="hint" />
+      <SearchBar ref="search" v-model="text" :hint="hint" />
       <!-- add a notification for adding a new one -->
 
       <ScrollView class="options">
@@ -23,12 +23,12 @@
 </template>
 
 <script>
-import Search from '../Search.vue';
+import SearchBar from '../SearchBar.vue';
 
 export default {
   name: 'SearchableDropdownModal',
   components: {
-    Search,
+    SearchBar,
   },
   props: {
     options: { type: Array, default: () => [] },

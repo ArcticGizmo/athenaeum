@@ -1,5 +1,5 @@
 <template>
-  <GridLayout class="search" columns="30 * 30">
+  <GridLayout class="search-bar" columns="30 * 30">
     <!-- search icon -->
     <Icon icon="search" />
     <TextField
@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'Search',
+  name: 'SearchBar',
   props: {
     value: null,
     hint: { type: String, default: 'Search ...' },
@@ -44,24 +44,24 @@ export default {
 </script>
 
 <style>
-.search {
+.search-bar {
   margin: 10;
   height: 50;
   background-color: #f6f6f6;
   border-radius: 50%;
 }
 
-.search .nt-icon {
+.search-bar .nt-icon {
   margin-left: 10;
   font-size: 20;
 }
 
-.search TextField {
+.search-bar TextField {
   margin-right: 5;
   border-width: 0;
 }
 
-.search .cross {
+.search-bar .cross {
   font-size: 20;
   margin-right: 10;
 }
