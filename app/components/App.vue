@@ -11,8 +11,8 @@ import Settings from './pages/Settings.vue';
 import LibraryPage from './pages/library/LibraryPage.vue';
 
 const PAGES = [
-  { name: 'Home', component: Home, icon: 'home' },
-  { name: 'Library', component: LibraryPage, icon: 'book', default: true },
+  { name: 'Home', component: Home, icon: 'home',default: true },
+  { name: 'Library', component: LibraryPage, icon: 'book' },
   'gap',
   { name: 'Add Book', component: Scanner, icon: 'barcode' },
   'gap',

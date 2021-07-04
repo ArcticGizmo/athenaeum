@@ -3,11 +3,13 @@
     <StackLayout class="content">
       <!-- searchbox -->
       <Search ref="search" v-model="text" :hint="hint" />
+      <!-- add a notification for adding a new one -->
 
-      <ScrollView class="matches">
+      <ScrollView class="options">
+        <!-- might want to make this a limited height -->
+
         <!-- if no matches show add -->
         <StackLayout>
-          <CLabel :text="keyboardShowing" />
           <CLabel
             class="option"
             v-for="(option, index) in filteredOptions"
@@ -16,11 +18,6 @@
           />
         </StackLayout>
       </ScrollView>
-
-      <!-- list of options (x percent of the screen maybe) -->
-      <!-- should be scrollable -->
-
-      <!-- select/add based on if it matches -->
     </StackLayout>
   </ScrollView>
 </template>
@@ -44,10 +41,8 @@ export default {
     };
   },
   computed: {
-    keyboardShowing() {
-      return this.$keyboard.isShowing;
-    },
     filteredOptions() {
+      // fuzzysort this
       return this.options;
     },
   },
@@ -66,6 +61,10 @@ export default {
 
 .searchable-dropdown-modal .content {
   padding: 10;
+}
+
+.searchable-dropdown-modal .options {
+  max-height: 80;
 }
 
 .searchable-dropdown-modal .option {
