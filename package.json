@@ -10,6 +10,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "scripts": {
+    "dev": "ns debug android --no-hmr"
+  },
   "files": [
     "app",
     "App_Resources",

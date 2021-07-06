@@ -5,10 +5,10 @@
 
     <ScrollView row="1">
       <StackLayout height="100%">
-        <ListView class="shelf-items" for="item in books">
+        <ListView class="book-cards" for="item in books">
           <v-template>
             <GridLayout>
-              <ShelfItem v-bind="item" />
+              <BookCard v-bind="item" @tap.native="onCardTap(item)" />
             </GridLayout>
           </v-template>
         </ListView>
@@ -21,7 +21,8 @@
 
 <script>
 import SearchBar from '@/components/SearchBar.vue';
-import ShelfItem from './ShelfItem.vue';
+import BookCard from './BookCard.vue';
+import BookViewer from '~/components/modals/BookViewer.vue';
 
 const BOOKS = [
   {
@@ -64,7 +65,7 @@ export default {
   name: 'Shelves',
   components: {
     SearchBar,
-    ShelfItem,
+    BookCard,
   },
   data: () => {
     return {
@@ -73,7 +74,11 @@ export default {
       searchHint: 'Find your book',
     };
   },
-  methods: {},
+  methods: {
+    onCardTap(book) {
+      this.$modalBus.open(BookViewer, { book });
+    },
+  },
 };
 </script>
 

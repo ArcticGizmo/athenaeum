@@ -1,5 +1,5 @@
 <template>
-  <GridLayout class="shelf-item" columns="100 *">
+  <GridLayout class="book-card" columns="100 *">
     <!-- book side -->
     <GridLayout rows="* * 20" columns="22 *">
       <!-- book colors -->
@@ -33,7 +33,7 @@
 
 <script>
 export default {
-  name: 'ShelfItem',
+  name: 'BookItem',
   props: {
     src: { type: String },
     title: { type: String },
@@ -54,25 +54,25 @@ export default {
 </script>
 
 <style>
-.shelf-item {
+.book-card {
   border-radius: 25;
   background-color: #f6f6f6;
   height: 160;
 }
 
-.shelf-item .color-swatch {
+.book-card .color-swatch {
   height: 20%;
 }
 
-.shelf-item .title {
+.book-card .title {
   font-size: 20;
 }
 
-.shelf-item .authors {
+.book-card .authors {
   font-size: 16;
 }
 
-.shelf-item .series {
+.book-card .series {
   font-size: 12;
 }
 </style>
