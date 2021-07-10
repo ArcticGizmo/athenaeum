@@ -1,16 +1,8 @@
 <template>
   <ScrollView class="home-page" orientation="vertical">
     <StackLayout>
-      <!-- recent books list -->
-      <ScrollView orientation="horizontal" scrollBarIndicatorVisible="false">
-        <StackLayout class="book-carosel" orientation="horizontal">
-          <Image class="book" v-for="item in books" :key="item" :src="item.src" />
-        </StackLayout>
-      </ScrollView>
-
       <!-- icon summary -->
       <FlexboxLayout class="icon-summary" alignItems="center" justifyContent="space-around">
-        <!-- <StackLayout class="icon-summary" orientation="horizontal" width="100%" horizontalAlignment="center"> -->
         <GridLayout
           class="icon-summary-item"
           rows="* *"
@@ -20,8 +12,14 @@
           <Icon row="0" :icon="item.icon" />
           <CLabel row="1" :text="item.count" />
         </GridLayout>
-        <!-- </StackLayout> -->
       </FlexboxLayout>
+
+      <!-- recent books list -->
+      <ScrollView class="recent-books" orientation="horizontal" scrollBarIndicatorVisible="false">
+        <StackLayout class="book-carosel" orientation="horizontal">
+          <Image class="book" v-for="item in books" :key="item" :src="item.src" />
+        </StackLayout>
+      </ScrollView>
 
       <!-- rating summary -->
       <GridLayout class="rating-summary" rows="* * * *" columns="* *">
@@ -151,7 +149,7 @@ export default {
 <style>
 /* book carosel */
 .home-page .book-carosel {
-  margin-top: 10;
+  margin: 10 0;
   height: 160;
 }
 
@@ -164,7 +162,7 @@ export default {
 /* Icon summary */
 .home-page .icon-summary {
   padding: 20;
-  margin: 20;
+  margin: 10;
   height: 120;
   background-color: #f6f6f6;
   border-radius: 30;

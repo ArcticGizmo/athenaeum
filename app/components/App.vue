@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import Layout from './layout/Layout.vue';
+import Layout from './layout/Layout2.vue';
 
 import Home from './pages/home/Home';
 import Scanner from './pages/Scanner';
@@ -11,12 +11,10 @@ import Settings from './pages/Settings.vue';
 import ShelvesPage from './pages/shelves/Shelves.vue';
 
 const PAGES = [
-  { name: 'Home', component: Home, icon: 'home' },
-  { name: 'Library', component: ShelvesPage, icon: 'book', default: true },
-  'gap',
-  { name: 'Add Book', component: Scanner, icon: 'barcode' },
-  'gap',
-  { name: 'Settings', component: Settings, icon: 'cog' },
+  { id: 'home', component: Home, icon: 'home', default: true },
+  { id: 'shelves', component: ShelvesPage, icon: 'book' },
+  { id: 'scanner', component: Scanner, icon: 'barcode' },
+  { id: 'settings', component: Settings, icon: 'cog' },
 ];
 
 export default {
