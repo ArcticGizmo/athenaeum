@@ -41,6 +41,8 @@ const ICONS = decodeMap({
   sort: 0xf15d,
   star: 0xf005,
   'hand-heart': 0xf4be,
+  plus: 0xf055,
+  clipboard: 0xf46d,
 });
 
 function decodeMap(icons) {

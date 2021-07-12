@@ -17,7 +17,7 @@
       <!-- recent books list -->
       <ScrollView class="recent-books" orientation="horizontal" scrollBarIndicatorVisible="false">
         <StackLayout class="book-carosel" orientation="horizontal">
-          <Image class="book" v-for="item in books" :key="item" :src="item.src" />
+          <Image class="book" v-for="(item, index) in books" :key="index" :src="item.src" />
         </StackLayout>
       </ScrollView>
 

@@ -3,19 +3,14 @@
 </template>
 
 <script>
-import Layout from './layout/Layout2.vue';
+import Layout from './layout/Layout.vue';
+import NewBookModal from './modals/NewBookModal.vue';
 
 import Home from './pages/home/Home';
 import Scanner from './pages/Scanner';
 import Settings from './pages/Settings.vue';
 import ShelvesPage from './pages/shelves/Shelves.vue';
-
-const PAGES = [
-  { id: 'home', component: Home, icon: 'home', default: true },
-  { id: 'shelves', component: ShelvesPage, icon: 'book' },
-  { id: 'scanner', component: Scanner, icon: 'barcode' },
-  { id: 'settings', component: Settings, icon: 'cog' },
-];
+import DevForm from './pages/dev/DevForm.vue';
 
 export default {
   components: {
@@ -23,11 +18,25 @@ export default {
   },
   data() {
     return {
-      pages: PAGES,
+      pages: [
+        { id: 'home', component: Home, icon: 'home' },
+        { id: 'shelves', component: ShelvesPage, icon: 'book' },
+        { id: 'add', action: this.onAddBook, icon: 'plus' },
+        { id: 'dev-form', component: DevForm, icon: 'clipboard', default: true },
+        { id: 'settings', component: Settings, icon: 'cog' },
+      ],
     };
   },
   mounted() {
     this.$store.load();
+  },
+  methods: {
+    onAddBook() {
+      this.$modalBus.open(NewBookModal).onClose(resp => {
+        console.dir('---- created book close');
+        console.dir(resp);
+      });
+    },
   },
 };
 </script>
