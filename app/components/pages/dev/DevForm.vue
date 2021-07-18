@@ -12,7 +12,7 @@
 import Form from '@/components/f/Form.vue';
 import { validationMixin } from 'vuelidate';
 import { required, minLength, numeric, minValue, maxValue } from 'vuelidate/lib/validators';
-import { exactLength, numbersOnly } from '@/components/f/validators';
+import { exactLength, numbersOnly, positive } from '@/components/f/validators';
 
 const STATE = {
   title: '',
@@ -34,7 +34,7 @@ const VALIDATIONS = {
   title: { required, min: minLength(5) },
   // authors: [],
   isbn: { required, numbersOnly, exactLength: exactLength(13) },
-  pages: { required, numeric, min: minValue(0) },
+  pages: { required, numeric, positive },
   dimensions: {
     unitOfMeasure: { required },
     width: { min: minValue(0) },
@@ -48,7 +48,8 @@ const VALIDATIONS = {
 
 const LAYOUT = {
   title: { type: 'input', label: 'Title', props: {} },
-  isbn: { type: 'input', label: 'ISBN', props: {} },
+  isbn: { type: 'input', label: 'ISBN', props: { keyboardType: 'integer' } },
+  pages: { type: 'numeric', label: 'Pages' },
 };
 
 const ERROR_PARSER = {
@@ -80,11 +81,6 @@ export default {
       console.dir(this.$v);
     },
     onValidate() {
-      const rg = /^[0-9]*$/;
-      console.dir(rg.test('aoi3fnea3f'));
-      console.dir(rg.test('777728282'));
-      console.dir(rg.test('-289383'));
-      console.dir(rg.test('38399dsdd'));
       // this.$v.$touch();
       // console.dir($v.errors);
       // console.dir($v.$errors);

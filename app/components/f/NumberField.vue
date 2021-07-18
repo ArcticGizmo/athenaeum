@@ -1,10 +1,10 @@
 <template>
   <TextField
-    class="input-field"
+    class="number-field"
     :class="{ error: v.$error }"
     :text="pendingText"
     :maxLength="maxLength"
-    v-bind="bindings"
+    keyboardType="integer"
     returnKeyType="done"
     @textChange="onChange"
     @blur="onEmit()"
@@ -16,23 +16,14 @@
 export default {
   name: 'InputField',
   props: {
-    value: { type: String, default: '' },
+    value: { type: [String, Number], default: '' },
     v: { type: Object, default: () => ({}) },
-    keyboardType: String,
     maxLength: { type: Number, default: Infinity },
   },
   data: () => {
     return {
       pendingText: '',
     };
-  },
-  computed: {
-    bindings() {
-      if (this.keyboardType) {
-        return { keyboardType: this.keyboardType };
-      }
-      return {};
-    },
   },
   watch: {
     value: {
@@ -47,14 +38,15 @@ export default {
       this.pendingText = event.value;
     },
     onEmit() {
-      this.$emit('input', this.pendingText);
+      const asNumber = Number(this.pendingText);
+      this.$emit('input', isNaN(asNumber) ? this.pendingText : asNumber);
     },
   },
 };
 </script>
 
 <style>
-.input-field {
+.number-field {
   width: 100%;
 }
 </style>
