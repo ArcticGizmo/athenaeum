@@ -1,19 +1,13 @@
 <template>
   <GridLayout rows="* * *">
     <CLabel row="0" text="Apples" />
-    <MultiForm />
     <CLabel row="2" text="Apples" />
   </GridLayout>
 </template>
 
 <script>
-import MultiForm from '@/components/form/MultiForm.vue';
-
 export default {
   name: 'NewBookModal',
-  components: {
-    MultiForm,
-  },
   methods: {
     close(resp) {
       this.$emit('close', resp);
