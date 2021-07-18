@@ -11,14 +11,7 @@
 <script>
 import Form from '@/components/f/Form.vue';
 import { validationMixin } from 'vuelidate';
-import {
-  required,
-  minLength,
-  maxLength,
-  numeric,
-  minValue,
-  maxValue,
-} from 'vuelidate/lib/validators';
+import { required, minLength, numeric, minValue, maxValue } from 'vuelidate/lib/validators';
 import { exactLength, numbersOnly } from '@/components/f/validators';
 
 const STATE = {
@@ -63,6 +56,7 @@ const ERROR_PARSER = {
   minLength: data => `Must be ${data.params.min} characters or more`,
   exactLength: data => `Must be exactly ${data.params.length} characters`,
   positive: 'Value must be positive',
+  numbersOnly: 'Must only contain numbers',
 };
 
 export default {
@@ -86,6 +80,11 @@ export default {
       console.dir(this.$v);
     },
     onValidate() {
+      const rg = /^[0-9]*$/;
+      console.dir(rg.test('aoi3fnea3f'));
+      console.dir(rg.test('777728282'));
+      console.dir(rg.test('-289383'));
+      console.dir(rg.test('38399dsdd'));
       // this.$v.$touch();
       // console.dir($v.errors);
       // console.dir($v.$errors);

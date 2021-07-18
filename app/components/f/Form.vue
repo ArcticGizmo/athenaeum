@@ -23,18 +23,15 @@ const COMPONENTS = {
 };
 
 function getErrors(layout, rootV, v, parser) {
-  const paramMap = Object.entries(v.$params)
-    .map(([key, params]) => {
-      return {
-        key,
-        type: (params || {}).type,
-        params,
-      };
-    })
-    .filter(e => e.type);
-
+  const paramMap = Object.entries(v.$params).map(([key, params]) => {
+    return {
+      key,
+      type: (params || {}).type,
+      params,
+    };
+  });
   const errors = paramMap.reduce((acc, p) => {
-    const msgCallback = parser[p.type];
+    const msgCallback = parser[p.type] || 'Invalid';
     if (msgCallback && !v[p.key]) {
       if (typeof msgCallback === 'string') {
         acc.push(msgCallback);

@@ -27,4 +27,4 @@ export const positive = withType(
   ),
 );
 
-export const numbersOnly = helpers.regex('numbersOnly', /^[0-9]*$/);
+export const numbersOnly = helpers.regex('numbersOnly', /^[0-9]*$/g);
