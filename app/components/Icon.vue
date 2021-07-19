@@ -43,6 +43,8 @@ const ICONS = decodeMap({
   'hand-heart': 0xf4be,
   plus: 0xf055,
   clipboard: 0xf46d,
+  'chevron-up': 0xf077,
+
 });
 
 function decodeMap(icons) {

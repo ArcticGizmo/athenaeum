@@ -42,18 +42,3 @@ export default {
 </script>
 
 <style>
-.dropdown-field {
-  width: 100%;
-}
-
-.dropdown-field button {
-  width: 100%;
-}
-
-.dropdown-field label {
-  color: white;
-  z-index: 10;
-  height: 100%;
-  width: 100%;
-}
-</style>

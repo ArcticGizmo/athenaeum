@@ -1,27 +1,22 @@
 <template>
   <GridLayout class="dropdown-field" columns="* 30">
     <Button colSpan="2" :text="value || placeholder" @tap="onOpenModal()" />
-    <Label col="1" :text="String.fromCharCode(chevronUp)" class="nt-icon fas" />
+    <Icon col="1" icon="chevron-up" />
   </GridLayout>
 </template>
 
 <script>
 import SelectModal from '@/components/modals/SelectModal.vue';
-const CHEVRON_UP = 0xf077;
 
 export default {
   name: 'DropdownField',
   props: {
     value: undefined,
+    v: { type: Object, required: true },
     title: { type: String, default: 'Select' },
     cancelText: { type: String, default: 'Cancel' },
     items: { type: Array, default: () => [] },
     placeholder: { type: String, default: '' },
-  },
-  data: () => {
-    return {
-      chevronUp: CHEVRON_UP,
-    };
   },
   methods: {
     onOpenModal() {
@@ -43,6 +38,7 @@ export default {
 
 <style>
 .dropdown-field {
+  height: 60;
   width: 100%;
 }
 
