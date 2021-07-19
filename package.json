@@ -47,6 +47,7 @@
     "axios": "^0.21.1",
     "fuzzysort": "^1.1.4",
     "nativescript-barcodescanner": "^4.1.1",
+    "nativescript-ui-autocomplete": "^7.0.2",
     "nativescript-ui-sidedrawer": "~9.0.3",
     "nativescript-vue": "~2.9.0",
     "rxjs": "~6.6.0",

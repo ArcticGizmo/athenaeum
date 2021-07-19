@@ -8,6 +8,9 @@ import { Keyboard } from '@/code/keyboard';
 import CLabel from './components/CLabel.vue';
 import Icon from './components/Icon.vue';
 
+import RadAutoComplete from 'nativescript-ui-autocomplete/vue';
+Vue.use(RadAutoComplete);
+
 Vue.registerElement(
   'BarcodeScanner',
   () => require('nativescript-barcodescanner').BarcodeScannerView,

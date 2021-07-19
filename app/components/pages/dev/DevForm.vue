@@ -1,11 +1,13 @@
 <template>
-  <StackLayout>
-    <CLabel text="Example form using Vuelidate" />
-    <Button text="log state" @tap="onLogState" />
+  <ScrollView class="dev-form">
+    <StackLayout>
+      <CLabel text="Example form using Vuelidate" />
+      <Button text="log state" @tap="onLogState" />
 
-    <Form :v="$v.form" :layout="layout" :parser="errorParser" />
-    <Button text="Validate" @tap="onValidate" />
-  </StackLayout>
+      <Form :v="$v.form" :layout="layout" :parser="errorParser" />
+      <Button text="Validate" @tap="onValidate" />
+    </StackLayout>
+  </ScrollView>
 </template>
 
 <script>
@@ -35,8 +37,13 @@ const STATE = {
     thickness: null,
   },
   binding: '',
+  secondaryBinding: '',
+  tags: '',
   rating: null,
   review: '',
+  a: '',
+  b: '',
+  c: '',
 };
 
 const VALIDATIONS = {
@@ -50,7 +57,12 @@ const VALIDATIONS = {
     height: { min: minValue(0) },
     thickness: { min: minValue(0) },
   },
-  binding: {},
+  binding: { required },
+  secondaryBinding: { required },
+  tags: { required },
+  a: '',
+  b: '',
+  c: '',
   rating: { min: minValue(0), max: maxValue(5) },
   review: {},
 };
@@ -58,12 +70,24 @@ const VALIDATIONS = {
 const LAYOUT = {
   title: { type: 'input', label: 'Title', props: {} },
   isbn: { type: 'input', label: 'ISBN', props: { keyboardType: 'integer' } },
-  pages: { type: 'numeric', label: 'Pages' },
   binding: {
     type: 'carousel',
     label: 'Binding',
     props: { items: BINDINGS, placeholder: 'Select Binding', add: () => console.dir('--- add') },
   },
+  secondaryBinding: {
+    type: 'dropdown',
+    label: 'Secondary Binding',
+    props: { items: BINDINGS, placeholder: 'Select Binding', add: () => console.dir('--- add') },
+  },
+  tags: {
+    type: 'autocomplete',
+    label: 'Tags',
+  },
+  pages: { type: 'numeric', label: 'Pages' },
+  a: { type: 'input', label: 'A' },
+  b: { type: 'input', label: 'B' },
+  c: { type: 'input', label: 'B' },
 };
 
 const ERROR_PARSER = {
@@ -102,3 +126,9 @@ export default {
   },
 };
 </script>
+
+<style>
+.dev-form .form {
+  margin: 0 20;
+}
+</style>

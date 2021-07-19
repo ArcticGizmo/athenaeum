@@ -20,12 +20,14 @@ import InputField from './InputField.vue';
 import NumberField from './NumberField.vue';
 import DropdownField from './DropdownField.vue';
 import CarouselField from './CarouselField.vue';
+import AutoCompleteField from './AutoCompleteField.vue';
 
 const COMPONENTS = {
   input: InputField,
   numeric: NumberField,
   dropdown: DropdownField,
   carousel: CarouselField,
+  autocomplete: AutoCompleteField,
 };
 
 function getErrors(layout, rootV, v, parser) {
