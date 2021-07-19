@@ -14,6 +14,15 @@ import { validationMixin } from 'vuelidate';
 import { required, minLength, numeric, minValue, maxValue } from 'vuelidate/lib/validators';
 import { exactLength, numbersOnly, positive } from '@/components/f/validators';
 
+const BINDINGS = [
+  'B Format',
+  'American B Format',
+  'Magazine',
+  'Hard Cover',
+  'English Hard Cover',
+  'Leather',
+];
+
 const STATE = {
   title: '',
   authors: [],
@@ -50,6 +59,11 @@ const LAYOUT = {
   title: { type: 'input', label: 'Title', props: {} },
   isbn: { type: 'input', label: 'ISBN', props: { keyboardType: 'integer' } },
   pages: { type: 'numeric', label: 'Pages' },
+  binding: {
+    type: 'carousel',
+    label: 'Binding',
+    props: { items: BINDINGS, placeholder: 'Select Binding', add: () => console.dir('--- add') },
+  },
 };
 
 const ERROR_PARSER = {

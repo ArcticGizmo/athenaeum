@@ -7,6 +7,7 @@
           v-for="(option, index) in options"
           :key="index"
           :text="option"
+          :textWrap="true"
           @tap="close(option)"
         />
       </template>
@@ -45,5 +46,10 @@ export default {
 
 .select-modal .content {
   padding: 10;
+}
+
+.select-modal .c-label {
+  font-size: 24;
+  margin-bottom: 10;
 }
 </style>

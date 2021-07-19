@@ -18,10 +18,14 @@ import FieldWrapper from './FieldWrapper.vue';
 import ErrorLabel from './ErrorLabel.vue';
 import InputField from './InputField.vue';
 import NumberField from './NumberField.vue';
+import DropdownField from './DropdownField.vue';
+import CarouselField from './CarouselField.vue';
 
 const COMPONENTS = {
   input: InputField,
   numeric: NumberField,
+  dropdown: DropdownField,
+  carousel: CarouselField,
 };
 
 function getErrors(layout, rootV, v, parser) {

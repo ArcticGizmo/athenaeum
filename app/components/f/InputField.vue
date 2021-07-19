@@ -17,7 +17,7 @@ export default {
   name: 'InputField',
   props: {
     value: { type: String, default: '' },
-    v: { type: Object, default: () => ({}) },
+    v: { type: Object, required: true },
     keyboardType: String,
     maxLength: { type: Number, default: Infinity },
   },
